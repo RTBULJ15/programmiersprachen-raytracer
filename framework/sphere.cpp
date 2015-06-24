@@ -2,11 +2,15 @@
 #include <cmath>
 
 #include "Sphere.hpp"
+#include "color.hpp"
 
-Sphere::Sphere(): center_(0.0f,0.0f,0.0f), radius_(0.0f)
+Sphere::Sphere()
+  : Shape{}, center_{0.0f,0.0f,0.0f}, radius_{0.0f}
 {}
 
-Sphere::Sphere(glm::vec3 const& center, float radius): center_(center), radius_(radius)
+
+Sphere::Sphere(glm::vec3 const& center, float radius, std::string name, Color color)
+  : Shape(name, color), center_(center), radius_(radius) //Shape::setName(name), Shape::setColor(color)
 {}
 
 glm::vec3 Sphere::getcenter() const{
@@ -22,7 +26,12 @@ float Sphere::area() const{
 }
 
 float Sphere::volume() const{
-  return (3.0/4.0)*M_PI*(radius_*radius_*radius_);
+  return (4.0/3.0)*M_PI*(radius_*radius_*radius_);
+}
+
+void Sphere::print(std::ostream& os) const{
+	Shape::print(os);
+	os << "Radius: " << radius_ << " Center: " << center_.x << center_.y << center_.z<<std::endl;
 }
 
 Sphere::~Sphere()

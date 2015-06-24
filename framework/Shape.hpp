@@ -10,12 +10,29 @@
 class Shape{
 
 public:
+	Shape ();
+	Shape (std::string, Color);
+
 	virtual float area() const = 0;
 
 	virtual float volume() const = 0;
 
-private:
 
+	void setName(std::string const&);
+	void setColor(Color const&);
+
+
+	virtual void print(std::ostream& os) const;
+
+	friend std::ostream& operator<<(std::ostream& os, Shape const& s)
+	{
+		s.print(os);
+		return os;
+	}
+
+protected:
+	std::string name_;
+	Color color_;
 
 };
 
