@@ -22,7 +22,9 @@ TEST_CASE("Box", "[Box]"){
 
 int main(int argc, char *argv[])
 {
-  Sphere kugel{glm::vec3{0.0f,0.0f,0.0f},1.0f, "default", {0,0,0}};
-  std::cout << kugel << std::endl;
+  Sphere kugel{glm::vec3{0.0f,0.0f,0.0f},1.0f, "Koogle", {1.0,0.2,0.4}};
+  Box box{glm::vec3{0.0f,0.0f,0.0f},glm::vec3{0.0f,0.0f,0.0f}, "Box_1", {1.0,0.4,0.5}};
+  std::cout << kugel << std::endl << box << std::endl;
+
   return Catch::Session().run(argc, argv);
 }
