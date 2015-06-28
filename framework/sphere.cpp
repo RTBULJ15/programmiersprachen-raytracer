@@ -3,6 +3,7 @@
 
 #include "Sphere.hpp"
 #include "color.hpp"
+#include <glm/gtx/intersect.hpp>
 
 Sphere::Sphere()
   : Shape{}, center_{0.0f,0.0f,0.0f}, radius_{0.0f}
@@ -32,6 +33,18 @@ float Sphere::volume() const{
 void Sphere::print(std::ostream& os) const{
 	Shape::print(os);
 	os << "Radius: " << radius_ << " Center: " << center_.x << center_.y << center_.z<<std::endl;
+}
+
+Intersection Sphere::intersect(Ray & ray) const& {
+
+	Intersection intersect;
+	intersect.hit = glm::intersectRaySphere(
+		ray.origin, ray.direction, 				// ray parameters
+		center_, radius_, 						// sphere parameters
+		intersect.position, intersect.normal 	// return per reference
+	);
+	
+	return intersect;
 }
 
 Sphere::~Sphere()

@@ -4,7 +4,8 @@
 #include "Shape.hpp"
 #include <glm/vec3.hpp>
 #include "color.hpp"
-
+#include "Ray.hpp"
+#include "intersection.hpp"
 
 class Sphere : public Shape{
 	public:
@@ -16,6 +17,8 @@ class Sphere : public Shape{
 
 		glm::vec3 getcenter() const;
 		float getradius() const;
+
+		Intersection intersect(Ray&) const&;
 
 		/* virtual */ void print(std::ostream&) const override;
 		~Sphere();

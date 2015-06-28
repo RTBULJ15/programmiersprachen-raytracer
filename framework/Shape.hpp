@@ -6,6 +6,7 @@
 #include "ppmwriter.hpp"
 #include <string>
 #include <glm/glm.hpp>
+#include "Ray.hpp"
 
 class Shape{
 
