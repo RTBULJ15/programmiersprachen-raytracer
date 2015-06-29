@@ -48,4 +48,6 @@ Intersection Sphere::intersect(Ray & ray) const& {
 }
 
 Sphere::~Sphere()
-{}
+{
+	std::cout << "~Sphere destructor called" << std::endl;
+}

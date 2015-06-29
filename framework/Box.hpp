@@ -3,7 +3,11 @@
 
 #include "Shape.hpp"
 #include <glm/vec3.hpp>
+#include <glm/gtx/intersect.hpp>
 #include "color.hpp"
+#include "Box.hpp"
+#include "intersection.hpp"
+#include "Trianglebox.hpp"
 
 
 class Box : public Shape{
@@ -19,6 +23,8 @@ class Box : public Shape{
 		glm::vec3 getMax() const;
 
 		/* virtual */ void print(std::ostream&) const override;
+
+		/*bool intersect(Ray&) const&;*/
 
 
 	private:

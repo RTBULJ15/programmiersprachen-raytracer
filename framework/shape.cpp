@@ -8,6 +8,11 @@
 	: name_(name), color_(color)
 	{}
 
+	Shape::~Shape()
+    {
+        std::cout << "~Shape destructor called" << std::endl;
+    }
+
 	void Shape::setName(std::string const& name) {name_=name;}
 	void Shape::setColor(Color const& colorSphere){color_=colorSphere;}
 

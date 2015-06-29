@@ -31,6 +31,8 @@ public:
 		return os;
 	}
 
+	virtual ~Shape();
+
 protected:
 	std::string name_;
 	Color color_;
