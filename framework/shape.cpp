@@ -1,11 +1,11 @@
 #include "Shape.hpp"
 
 	Shape::Shape ()
-	: name_{"default"}, color_{0,0,0}
+	: name_{"default"}, material_{}
 	{}
 
-	Shape::Shape (std::string name, Color color)
-	: name_(name), color_(color)
+	Shape::Shape (std::string const& name, Material const& material)
+	: name_(name), material_(material)
 	{}
 
 	Shape::~Shape()
@@ -13,10 +13,10 @@
         std::cout << "~Shape destructor called" << std::endl;
     }
 
-	void Shape::setName(std::string const& name) {name_=name;}
-	void Shape::setColor(Color const& colorSphere){color_=colorSphere;}
+	std::string const& Shape::getName() const{return name_;}
+	Material const& Shape::getMaterial() const{return material_;}
 
 	void Shape::print(std::ostream& os) const { 
-		os<<"Name: "<<name_<<", Color: "<<color_<<std::endl;
+		os<<"Name: "<<name_<<", Material: "<<material_<<std::endl;
 		
 	}

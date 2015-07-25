@@ -14,7 +14,7 @@ class Box : public Shape{
 
 	public:
 		Box();
-		Box(glm::vec3 const& min, glm::vec3 const& max, std::string name, Color color);
+		Box(glm::vec3 const& min, glm::vec3 const& max, std::string name, Material const& material);
 
 		/* virtual */ float area() const override;
 		/* virtual */ float volume() const override;
@@ -24,7 +24,7 @@ class Box : public Shape{
 
 		/* virtual */ void print(std::ostream&) const override;
 
-		/*bool intersect(Ray&) const&;*/
+		Intersection intersect(Ray const&) const override;
 
 
 	private:

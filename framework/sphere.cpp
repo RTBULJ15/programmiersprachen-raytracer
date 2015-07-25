@@ -10,8 +10,8 @@ Sphere::Sphere()
 {}
 
 
-Sphere::Sphere(glm::vec3 const& center, float radius, std::string name, Color color)
-  : Shape(name, color), center_(center), radius_(radius) //Shape::setName(name), Shape::setColor(color)
+Sphere::Sphere(glm::vec3 const& center, float radius, std::string name, Material const& material)
+  : Shape(name, material), center_(center), radius_(radius) //Shape::setName(name), Shape::setColor(color)
 {}
 
 glm::vec3 Sphere::getcenter() const{
@@ -35,7 +35,7 @@ void Sphere::print(std::ostream& os) const{
 	os << "Radius: " << radius_ << " Center: " << center_.x << center_.y << center_.z<<std::endl;
 }
 
-Intersection Sphere::intersect(Ray & ray) const& {
+Intersection Sphere::intersect(Ray const& ray) const {
 
 	Intersection intersect;
 	intersect.hit = glm::intersectRaySphere(

@@ -7,8 +7,8 @@ Box::Box()
 {}
 
 
-Box::Box(glm::vec3 const& min, glm::vec3 const& max, std::string name, Color color)
-  : Shape(name, color), min_(min), max_(max)
+Box::Box(glm::vec3 const& min, glm::vec3 const& max, std::string name, Material const& material)
+  : Shape(name, material), min_(min), max_(max)
 {}
 
 
@@ -47,7 +47,7 @@ void Box::print(std::ostream& os) const{
 	os << " MaxVec: " << max_.x << max_.y << max_.z;
 }
 
-/*bool Box::intersect(Ray & ray) const&{
+Intersection Box::intersect(Ray const& ray) const{
 
 		Trianglebox tri11{{min_.x, min_.y, min_.z},{min_.x, max_.y, min_.z},{max_.x, max_.y, min_.z}}; //boxfront
 		Trianglebox tri12{{min_.x, min_.y, min_.z},{max_.x, min_.y, min_.z},{max_.x, max_.y, min_.z}}; //boxfront
@@ -66,23 +66,26 @@ void Box::print(std::ostream& os) const{
 
 		bool intersect=false;
 		glm::vec3 hitposition;
+		glm::vec3 normal;
+		double t = 0;
 
-		if (glm::intersectRayTriangle(ray.origin, ray.direction, tri11.v1, tri11.v2, tri11.v3, hitposition){intersect=true;};
-		if (glm::intersectRayTriangle(ray.origin, ray.direction, tri12.v1, tri12.v2, tri12.v3, hitposition){intersect=true;};
+		if (glm::intersectRayTriangle(ray.origin, ray.direction, tri11.v1, tri11.v2, tri11.v3, hitposition)
+		|| glm::intersectRayTriangle(ray.origin, ray.direction, tri12.v1, tri12.v2, tri12.v3, hitposition)
 		
-		if (glm::intersectRayTriangle(ray.origin, ray.direction, tri21.v1, tri21.v2, tri21.v3, hitposition){intersect=true;};
-		if (glm::intersectRayTriangle(ray.origin, ray.direction, tri22.v1, tri22.v2, tri22.v3, hitposition){intersect=true;};
+		|| glm::intersectRayTriangle(ray.origin, ray.direction, tri21.v1, tri21.v2, tri21.v3, hitposition)
+		|| glm::intersectRayTriangle(ray.origin, ray.direction, tri22.v1, tri22.v2, tri22.v3, hitposition)
 		
-		if (glm::intersectRayTriangle(ray.origin, ray.direction, tri31.v1, tri31.v2, tri31.v3, hitposition){intersect=true;};
-		if (glm::intersectRayTriangle(ray.origin, ray.direction, tri32.v1, tri32.v2, tri32.v3, hitposition){intersect=true;};
+		|| glm::intersectRayTriangle(ray.origin, ray.direction, tri31.v1, tri31.v2, tri31.v3, hitposition)
+		|| glm::intersectRayTriangle(ray.origin, ray.direction, tri32.v1, tri32.v2, tri32.v3, hitposition)
 		
-		if (glm::intersectRayTriangle(ray.origin, ray.direction, tri41.v1, tri41.v2, tri41.v3, hitposition){intersect=true;};
-		if (glm::intersectRayTriangle(ray.origin, ray.direction, tri42.v1, tri42.v2, tri42.v3, hitposition){intersect=true;};
+		|| glm::intersectRayTriangle(ray.origin, ray.direction, tri41.v1, tri41.v2, tri41.v3, hitposition)
+		|| glm::intersectRayTriangle(ray.origin, ray.direction, tri42.v1, tri42.v2, tri42.v3, hitposition)
 		
-		if (glm::intersectRayTriangle(ray.origin, ray.direction, tri51.v1, tri51.v2, tri51.v3, hitposition){intersect=true;};
-		if (glm::intersectRayTriangle(ray.origin, ray.direction, tri52.v1, tri52.v2, tri52.v3, hitposition){intersect=true;};
- return intersect;
-}*/
+		|| glm::intersectRayTriangle(ray.origin, ray.direction, tri51.v1, tri51.v2, tri51.v3, hitposition)
+		|| glm::intersectRayTriangle(ray.origin, ray.direction, tri52.v1, tri52.v2, tri52.v3, hitposition)){intersect=true;};
+ 
+ return Intersection(intersect, t, hitposition, normal); 
+}
 	/*Intersection intersect;
 	intersect.hit = glm::intersectRayPlane(
 		ray.origin, ray.direction, 				// ray parameters
