@@ -1,34 +1,69 @@
+
+#include <omp.h>
+
+#include "Shape.hpp"
+#include "Box.hpp"
+#include "Material.hpp"
 #include "fensterchen.hpp"
+#include "Ray.hpp"
+#include "intersection.hpp"
+#include "Sphere.hpp"
 
 int main(int argc, char* argv[])
 {
-  Window win(glm::ivec2(800,800));
+ Material black;
+ float depth = 100.0;
+    glm::vec3 offset(0, 0, 0);
+    Box test_box(glm::vec3{-1.0,-1.0,5.0} + offset, glm::vec3{1.0,1.0,6.0} + offset,"testbox", black);
+    Sphere test_kreis(glm::vec3{0.0,0.0,5.0}, 1.0,"testkreis", black);
 
-  while (!win.shouldClose()) {
-    if (win.isKeyPressed(GLFW_KEY_ESCAPE)) {
-      win.stop();
+  int win_size_x=400;
+  int win_size_y=400;
+  float xpos_pro=1/float(win_size_x);
+  float ypos_pro=1/float(win_size_y);
+  Window win(glm::ivec2(win_size_x,win_size_y));
+
+
+
+glm::vec3 eye{0, 0, 0};
+float focal_length = 2.0;
+
+float t = 0;
+
+win.update();
+
+
+
+while (!win.shouldClose()) {
+  #pragma omp parallel for collapse(2) 
+  for(int i=0; i<win_size_x; i++){
+    for(int u=0; u<win_size_y; u++){
+
+      float x = float(i) / win_size_x;
+      float y = float(u) / win_size_y;
+
+      auto ray_dir = glm::normalize(glm::vec3{2*x-1, 2*y-1, focal_length});
+      Ray charles(eye, ray_dir);
+      auto isec = test_kreis.intersect(charles);
+      
+    
+      if (isec.hit){
+        win.drawPoint(x,y,glm::abs(std::cos(isec.normal.x)) * 255, 
+                          glm::abs(std::cos(isec.normal.y)) * 255, 
+                          glm::abs(std::cos(isec.normal.z)) * 255);
+         }
+      // else{
+      //   win.drawPoint(x,y, 33.0,33.0,33.0);
+      // }
+            
     }
-
-    auto t = win.getTime();
-    float x1(0.5 + 0.5 * std::sin(t)); float y1(0.5 + 0.5 * std::cos(t));
-    float x2(0.5 + 0.5 * std::sin(2.0*t)); float y2(0.5 + 0.5 * std::cos(2.0*t));
-    float x3(0.5 + 0.5 * std::sin(t-10.f)); float y3(0.5 + 0.5 * std::cos(t-10.f));
-
-    win.drawPoint(x1, y1, 255, 0, 0);
-    win.drawPoint(x2, y2, 0, 255, 0);
-    win.drawPoint(x3, y3, 0, 0, 255);
-
-    auto m = win.mousePosition();
-    win.drawLine(0.1f,0.1f, 0.8f,0.1f, 255,0,0);
-
-    win.drawLine(0.0f, m.y, 0.01f, m.y, 0,0,0);
-    win.drawLine(0.99f, m.y,1.0f, m.y, 0,0,0);
-
-    win.drawLine(m.x, 0.0f, m.x, 0.01f, 0,0,0);
-    win.drawLine(m.x, 0.99f,m.x, 1.0f, 0,0,0);
-
-    win.update();
+    
   }
+  eye.y = 2.0 * std::sin(t);
+  eye.x = 2.0 * std::cos(t);
+  t += 1e-2;
+  win.update();
+}
 
   return 0;
 }
