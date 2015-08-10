@@ -11,9 +11,9 @@ class Sphere : public Shape{
 	public:
 		Sphere();
 		Sphere(glm::vec3 const& center, float radiusr, std::string name, Material const& material);
-		
-		/* virtual */ float area() const ;
-		/* virtual */ float volume() const override;
+
+		/* virtual  float area() const ;
+		virtual  float volume() const override;*/
 
 		glm::vec3 getcenter() const;
 		float getradius() const;
@@ -26,7 +26,7 @@ class Sphere : public Shape{
 	private:
 		glm::vec3 center_;
 		float radius_;
-	
+
 
 };
 

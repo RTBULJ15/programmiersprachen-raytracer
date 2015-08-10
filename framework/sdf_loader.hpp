@@ -3,15 +3,18 @@
 
 #include <vector>
 #include <string>
+#include "scene.hpp"
 #include "Material.hpp"
+#include "light.hpp"
 
 class SDFLoader {
 
 public:
 	SDFLoader(std::string const& sdfpath);
-	std::vector<Material> materials () const;
+	Scene scene () const;
 private:
-	std::vector<Material> materials_;
+    Scene scene_;
+
 };
 
 #endif

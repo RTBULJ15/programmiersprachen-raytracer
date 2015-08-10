@@ -28,7 +28,7 @@ class Box : public Shape{
 			 : v1_(u)
 			 , v2_(v)
 			 , v3_(w)
-			 , n_(glm::normalize(glm::cross(v3_ - v1_, v2_ - v1_))) 
+			 , n_(glm::normalize(glm::cross(v3_ - v1_, v2_ - v1_)))
 			{}
 
 			glm::vec3 v1 () const {
@@ -49,8 +49,8 @@ class Box : public Shape{
 				Intersection isec;
 
 				isec.hit = glm::intersectRayTriangle (
-					ray.origin, ray.direction, 
-					v1_, v2_, v3_, 
+					ray.origin, ray.direction,
+					v1_, v2_, v3_,
 					bary
 				);
 
@@ -116,9 +116,9 @@ class Box : public Shape{
 		Box();
 		Box(glm::vec3 const& min, glm::vec3 const& max, std::string name, Material const& material);
 
-		/* virtual */ float area() const override;
-		/* virtual */ float volume() const override;
-		
+		/* virtual  float area() const override;
+		 virtual  float volume() const override; */
+
 		glm::vec3 getMin() const;
 		glm::vec3 getMax() const;
 

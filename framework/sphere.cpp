@@ -22,13 +22,13 @@ float Sphere::getradius() const{
   return radius_;
 }
 
-float Sphere::area() const{
+/*float Sphere::area() const{
   return 4.0*M_PI*(radius_*radius_);
 }
 
 float Sphere::volume() const{
   return (4.0/3.0)*M_PI*(radius_*radius_*radius_);
-}
+} */
 
 void Sphere::print(std::ostream& os) const{
 	Shape::print(os);
@@ -43,7 +43,7 @@ Intersection Sphere::intersect(Ray const& ray) const {
 		center_, radius_, 						// sphere parameters
 		intersect.position, intersect.normal 	// return per reference
 	);
-	
+
 	return intersect;
 }
 

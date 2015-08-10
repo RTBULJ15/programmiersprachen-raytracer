@@ -10,13 +10,13 @@ void print_vector (T v) {
 	std::cout << v.x << " " << v.y << " " << v.z;
 }
 
-TEST_CASE("Sphere", "[Sphere]"){
-	
+/*TEST_CASE("Sphere", "[Sphere]"){
+
 	Material black;
 
 	Sphere kugel{glm::vec3{0.0f,0.0f,0.0f},1.0f, "default", black};
-	
-	
+
+
 	REQUIRE(kugel.volume()==Approx(4.189).epsilon(0.17));
 	REQUIRE(kugel.area()==Approx(12.566).epsilon(0.17));
 }
@@ -29,7 +29,7 @@ TEST_CASE("Box", "[Box]"){
 
 	REQUIRE(box.area()==Approx(6.0f));
 	REQUIRE(box.volume()==Approx(1.0f));
-}
+} */
 
 TEST_CASE("intersectRaySphere", "[intersect]")
 {
@@ -82,10 +82,10 @@ TEST_CASE("Shape", "[destructor")
 	glm::vec3 position(0,0,0);
 	Sphere* s1 = new Sphere(position, 1.2f, "sphere0", mat);
 	Shape* s2 = new Sphere(position, 1.2f, "sphere1", mat);
-	
+
 	s1->print(std::cout);
 	s2->print(std::cout);
-	
+
 	delete s1;
 	delete s2;
 }
@@ -98,13 +98,13 @@ TEST_CASE("Box_inter", "[intersect]")
 	REQUIRE (box1.intersect(charles).hit);
 }
 
-TEST_CASE("sdf loader", "[load]")
+/*TEST_CASE("sdf loader", "[load]")
 {
 	SDFLoader loader("materials.sdf");
 	for (auto mat: loader.materials()) {
 		std::cout << mat;
 	}
-}
+}*/
 
 int main(int argc, char *argv[])
 {
@@ -113,10 +113,10 @@ int main(int argc, char *argv[])
   Box box{glm::vec3{0.0f,0.0f,0.0f},glm::vec3{0.0f,0.0f,0.0f}, "Box_1", mat};
   std::cout << kugel << std::endl << box << std::endl;
 
-  SDFLoader loader("materials.sdf");
+    /*SDFLoader loader("materials.sdf");
 	for (auto mat: loader.materials()) {
-		std::cout << mat;
-	}
+		std::cout << mat
+	 */
 
   return Catch::Session().run(argc, argv);
 }

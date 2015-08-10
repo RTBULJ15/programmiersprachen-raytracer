@@ -4,8 +4,8 @@
 #include <fstream>
 #include <sstream>
 
-SDFLoader::SDFLoader (std::string const& sdfpath) 
- : materials_()
+SDFLoader::SDFLoader (std::string const& sdfpath)
+ : scene_()
 {
 	std::ifstream infile;
 	infile.open(sdfpath);
@@ -28,7 +28,9 @@ SDFLoader::SDFLoader (std::string const& sdfpath)
 		//if (token_str == # skip line)
 
 
-		if (token_str=="define material"){
+		if (iss >> token_str){
+            std::cout << "iss >> token_str" << line << std::endl;
+            if (token_str=="define material") {
 			// expect 'define'
 			if (!(iss >> token_str) || token_str != "define") {
 				throw std::exception();
@@ -39,11 +41,12 @@ SDFLoader::SDFLoader (std::string const& sdfpath)
 				throw std::exception();
 			}
 
+
 			// expect std::string
 			if (!(iss >> token_str)) {
 				throw std::exception();
 			}
-			
+
 			mat.name = token_str;
 
 			// expect ambient color
@@ -120,14 +123,14 @@ SDFLoader::SDFLoader (std::string const& sdfpath)
 
 		std::cout << "loaded " << mat << std::endl;
 
-		materials_.push_back(mat);
+		//materials_.push_back(mat);
 		}
 
 
 		else if(token_str=="define shape"){
-			
+
 			if(token_str=="box"){
-				
+
 			}
 
 			}
@@ -141,13 +144,14 @@ SDFLoader::SDFLoader (std::string const& sdfpath)
 		}
 
 
-
+    }
 	}
+
 }
 
-std::vector<Material>
-SDFLoader::materials () const
+Scene
+SDFLoader::scene () const
 {
-	return materials_;
+	return scene_;
 }
 

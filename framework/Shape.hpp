@@ -17,9 +17,9 @@ public:
 
 	virtual Intersection intersect(Ray const& ray) const = 0; //pure virtual
 
-	virtual float area() const = 0;
+	//virtual float area() const = 0;
 
-	virtual float volume() const = 0;
+	//virtual float volume() const = 0;
 
 
 	std::string const& getName() const;
@@ -45,4 +45,4 @@ protected:
 
 
 
-#endif 
+#endif

@@ -33,22 +33,22 @@ Box::Box(glm::vec3 const& p1, glm::vec3 const& p2, std::string name, Material co
 	Triangle back_t2(ldb, rub, lub);
 	Face back(back_t1, back_t2);
 
-	// up face 
+	// up face
 	Triangle up_t1(ruf, luf, rub);
 	Triangle up_t2(rub, luf, lub);
 	Face up(up_t1, up_t2);
 
-	// down face 
+	// down face
 	Triangle down_t1(ldf, rdf, rdb);
 	Triangle down_t2(ldf, rdb, ldb);
 	Face down(down_t1, down_t2);
 
-	// left face 
+	// left face
 	Triangle left_t1(luf, ldf, lub);
 	Triangle left_t2(lub, ldf, ldb);
 	Face left(left_t1, left_t2);
 
-	// right face 
+	// right face
 	Triangle right_t1(rdf, ruf, rub);
 	Triangle right_t2(rdf, rub, rdb);
 	Face right(right_t1, right_t2);
@@ -70,13 +70,13 @@ glm::vec3 Box::getMax() const{
 	return max_;
 }
 
-float Box::area() const{
-	
+/*float Box::area() const{
+
 	glm::vec3 vecTemp=max_-min_;
 	float side_a=vecTemp.x;
 	float side_b=vecTemp.y;
 	float side_c=vecTemp.z;
-	
+
 	return 2.0f*(side_a*side_b)+2.0f*(side_a*side_c)+2.0f*(side_b*side_c);
 }
 
@@ -86,9 +86,9 @@ float Box::volume() const{
 	float side_a=vecTemp.x;
 	float side_b=vecTemp.y;
 	float side_c=vecTemp.z;
-	
+
 	return side_a*side_b*side_c;
-}
+} */
 
 
 void Box::print(std::ostream& os) const{
@@ -115,14 +115,14 @@ Intersection Box::intersect(Ray const& ray) const{
 		intersect.position, intersect.normal 	// return per reference
 	);*/
 /*
-bool glm::gtx::intersect::intersectRayTriangle 	( 	
+bool glm::gtx::intersect::intersectRayTriangle 	(
 		genType const &  	orig,
 		genType const &  	dir,
 		genType const &  	vert0,
 		genType const &  	vert1,
 		genType const &  	vert2,
-		genType &  	baryPosition 
-	) 	
+		genType &  	baryPosition
+	)
 
 
 */
