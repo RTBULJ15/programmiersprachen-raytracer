@@ -2,14 +2,64 @@
 #include "color.hpp"
 #include <glm/gtx/intersect.hpp>
 
+// TODO: anpassen
 Box::Box()
-  : Shape{}, min_(0,0,0), max_(0,0,0)
+  : Shape{}, min_(0,0,0), max_(0,0,0), faces_()
 {}
 
 
-Box::Box(glm::vec3 const& min, glm::vec3 const& max, std::string name, Material const& material)
-  : Shape(name, material), min_(min), max_(max)
-{}
+Box::Box(glm::vec3 const& p1, glm::vec3 const& p2, std::string name, Material const& material)
+  : Shape(name, material)
+  , min_(std::min(p1.x, p2.x), std::min(p1.y, p2.y), std::min(p1.z, p2.z))
+  , max_(std::max(p1.x, p2.x), std::max(p1.y, p2.y), std::max(p1.z, p2.z))
+  , faces_()
+{
+	glm::vec3 ldf (min_.x, min_.y, min_.z);
+	glm::vec3 ldb (min_.x, min_.y, max_.z);
+	glm::vec3 luf (min_.x, max_.y, min_.z);
+	glm::vec3 lub (min_.x, max_.y,max_.z);
+	glm::vec3 rdf (max_.x, min_.y, min_.z);
+	glm::vec3 rdb (max_.x, min_.y, max_.z);
+	glm::vec3 ruf (max_.x, max_.y, min_.z);
+	glm::vec3 rub (max_.x, max_.y,max_.z);
+
+	// front face
+	Triangle front_t1(rdf, ldf, ruf);
+	Triangle front_t2(ruf, ldf, luf);
+	Face front(front_t1, front_t2);
+
+	// back face
+	Triangle back_t1(ldb, rdb, rub);
+	Triangle back_t2(ldb, rub, lub);
+	Face back(back_t1, back_t2);
+
+	// up face 
+	Triangle up_t1(ruf, luf, rub);
+	Triangle up_t2(rub, luf, lub);
+	Face up(up_t1, up_t2);
+
+	// down face 
+	Triangle down_t1(ldf, rdf, rdb);
+	Triangle down_t2(ldf, rdb, ldb);
+	Face down(down_t1, down_t2);
+
+	// left face 
+	Triangle left_t1(luf, ldf, lub);
+	Triangle left_t2(lub, ldf, ldb);
+	Face left(left_t1, left_t2);
+
+	// right face 
+	Triangle right_t1(rdf, ruf, rub);
+	Triangle right_t2(rdf, rub, rdb);
+	Face right(right_t1, right_t2);
+
+	faces_[0] = front;
+	faces_[1] = back;
+	faces_[2] = left;
+	faces_[3] = right;
+	faces_[4] = up;
+	faces_[5] = down;
+}
 
 
 
@@ -48,44 +98,16 @@ void Box::print(std::ostream& os) const{
 }
 
 Intersection Box::intersect(Ray const& ray) const{
-
-		Trianglebox tri11{{min_.x, min_.y, min_.z},{min_.x, max_.y, min_.z},{max_.x, max_.y, min_.z}}; //boxfront
-		Trianglebox tri12{{min_.x, min_.y, min_.z},{max_.x, min_.y, min_.z},{max_.x, max_.y, min_.z}}; //boxfront
-
-		Trianglebox tri21{{min_.x, min_.y, min_.z},{min_.x, min_.y, max_.z},{max_.x, min_.y, max_.z}}; //underside
-		Trianglebox tri22{{min_.x, min_.y, min_.z},{max_.x, min_.y, min_.z},{max_.x, min_.y, max_.z}}; //underside
-
-		Trianglebox tri31{{min_.x, max_.y, min_.z},{min_.x, max_.y, max_.z},{max_.x, max_.y, max_.z}}; //overside
-		Trianglebox tri32{{min_.x, max_.y, min_.z},{max_.x, max_.y, min_.z},{max_.x, max_.y, max_.z}}; //overside
-
-		Trianglebox tri41{{min_.x, min_.y, min_.z},{min_.x, max_.y, min_.z},{min_.x, max_.y, max_.z}}; //leftside
-		Trianglebox tri42{{min_.x, min_.y, min_.z},{min_.x, max_.y, max_.z},{min_.x, max_.y, max_.z}}; //leftside
-
-		Trianglebox tri51{{max_.x, min_.y, min_.z},{max_.x, max_.y, min_.z},{max_.x, max_.y, max_.z}}; //rigthside
-		Trianglebox tri52{{max_.x, min_.y, min_.z},{max_.x, min_.y, max_.z},{max_.x, max_.y, max_.z}}; //rigthside
-
-		bool intersect=false;
-		glm::vec3 hitposition;
-		glm::vec3 normal;
-		double t = 0;
-
-		if (glm::intersectRayTriangle(ray.origin, ray.direction, tri11.v1, tri11.v2, tri11.v3, hitposition)
-		|| glm::intersectRayTriangle(ray.origin, ray.direction, tri12.v1, tri12.v2, tri12.v3, hitposition)
-		
-		|| glm::intersectRayTriangle(ray.origin, ray.direction, tri21.v1, tri21.v2, tri21.v3, hitposition)
-		|| glm::intersectRayTriangle(ray.origin, ray.direction, tri22.v1, tri22.v2, tri22.v3, hitposition)
-		
-		|| glm::intersectRayTriangle(ray.origin, ray.direction, tri31.v1, tri31.v2, tri31.v3, hitposition)
-		|| glm::intersectRayTriangle(ray.origin, ray.direction, tri32.v1, tri32.v2, tri32.v3, hitposition)
-		
-		|| glm::intersectRayTriangle(ray.origin, ray.direction, tri41.v1, tri41.v2, tri41.v3, hitposition)
-		|| glm::intersectRayTriangle(ray.origin, ray.direction, tri42.v1, tri42.v2, tri42.v3, hitposition)
-		
-		|| glm::intersectRayTriangle(ray.origin, ray.direction, tri51.v1, tri51.v2, tri51.v3, hitposition)
-		|| glm::intersectRayTriangle(ray.origin, ray.direction, tri52.v1, tri52.v2, tri52.v3, hitposition)){intersect=true;};
- 
- return Intersection(intersect, t, hitposition, normal); 
+	Intersection isec;
+	for (auto f: faces_) {
+		auto cur_isec = f.intersect(ray);
+		if (cur_isec.hit && ((isec.hit && cur_isec.t < isec.t) || !isec.hit)) {
+			isec = cur_isec;
+		}
+	}
+	return isec;
 }
+
 	/*Intersection intersect;
 	intersect.hit = glm::intersectRayPlane(
 		ray.origin, ray.direction, 				// ray parameters

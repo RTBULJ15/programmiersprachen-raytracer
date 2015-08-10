@@ -4,10 +4,10 @@
 #include <glm/glm.hpp>
 struct Intersection
 {
-	Intersection () : hit(false), t(0), position(), normal() {}
+	Intersection () : hit(false), t(-1), position(), normal() {}
 
 	Intersection (bool h, double ray_t, glm::vec3 const& p, glm::vec3 const& n)
-	 : hit(h)
+	 : hit(h && ray_t >= 0)
 	 , position(p)
 	 , normal(n)
 	 , t(ray_t)

@@ -27,7 +27,7 @@ struct Material
 		os << "Name: " << m.name << " ";
 		os << "Ambient: " << m.ka << " ";
 		os << "Diffuse: " << m.kd << " ";
-		os << "Ambient: " << m.ks << " ";
+		os << "Specular: " << m.ks << " ";
 		os << "Specular Exponent: " << m.specular_exp << " ";
 		return os;
 	}

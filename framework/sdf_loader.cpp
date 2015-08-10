@@ -24,98 +24,123 @@ SDFLoader::SDFLoader (std::string const& sdfpath)
 
 		// expect material name
 
-		// expect 'define'
-		if (!(iss >> token_str) || token_str != "define") {
-			throw std::exception();
-		}
-
-		// expect 'material'
-		if (!(iss >> token_str) || token_str != "material") {
-			throw std::exception();
-		}
-
-		// expect std::string
-		if (!(iss >> token_str)) {
-			throw std::exception();
-		}
-		
-		mat.name = token_str;
-
-		// expect ambient color
-
-		// expect double
-		if (!(iss >> token_double)) {
-			throw std::exception();
-		}
-		mat.ka.r = token_double;
-
-		// expect double
-		if (!(iss >> token_double)) {
-			throw std::exception();
-		}
-		mat.ka.g = token_double;
-
-		// expect double
-		if (!(iss >> token_double)) {
-			throw std::exception();
-		}
-		mat.ka.b = token_double;
+		// annotation
+		//if (token_str == # skip line)
 
 
+		if (token_str=="define material"){
+			// expect 'define'
+			if (!(iss >> token_str) || token_str != "define") {
+				throw std::exception();
+			}
 
-		// expect diffuse color
+			// expect 'material'
+			if (!(iss >> token_str) || token_str != "material") {
+				throw std::exception();
+			}
 
-		// expect double
-		if (!(iss >> token_double)) {
-			throw std::exception();
-		}
-		mat.kd.r = token_double;
+			// expect std::string
+			if (!(iss >> token_str)) {
+				throw std::exception();
+			}
+			
+			mat.name = token_str;
 
-		// expect double
-		if (!(iss >> token_double)) {
-			throw std::exception();
-		}
-		mat.kd.g = token_double;
+			// expect ambient color
 
-		// expect double
-		if (!(iss >> token_double)) {
-			throw std::exception();
-		}
-		mat.kd.b = token_double;
+			// expect double
+			if (!(iss >> token_double)) {
+				throw std::exception();
+			}
+			mat.ka.r = token_double;
 
-		// expect specular color
+			// expect double
+			if (!(iss >> token_double)) {
+				throw std::exception();
+			}
+			mat.ka.g = token_double;
 
-		// expect double
-		if (!(iss >> token_double)) {
-			throw std::exception();
-		}
-		mat.ks.r = token_double;
-
-		// expect double
-		if (!(iss >> token_double)) {
-			throw std::exception();
-		}
-		mat.ks.g = token_double;
-
-		// expect double
-		if (!(iss >> token_double)) {
-			throw std::exception();
-		}
-		mat.ks.b = token_double;
+			// expect double
+			if (!(iss >> token_double)) {
+				throw std::exception();
+			}
+			mat.ka.b = token_double;
 
 
-		// expect specular exponent
 
-		// expect double
-		if (!(iss >> token_double)) {
-			throw std::exception();
-		}
-		mat.specular_exp = token_double;
+			// expect diffuse color
 
+			// expect double
+			if (!(iss >> token_double)) {
+				throw std::exception();
+			}
+			mat.kd.r = token_double;
+
+			// expect double
+			if (!(iss >> token_double)) {
+				throw std::exception();
+			}
+			mat.kd.g = token_double;
+
+			// expect double
+			if (!(iss >> token_double)) {
+				throw std::exception();
+			}
+			mat.kd.b = token_double;
+
+			// expect specular color
+
+			// expect double
+			if (!(iss >> token_double)) {
+				throw std::exception();
+			}
+			mat.ks.r = token_double;
+
+			// expect double
+			if (!(iss >> token_double)) {
+				throw std::exception();
+			}
+			mat.ks.g = token_double;
+
+			// expect double
+			if (!(iss >> token_double)) {
+				throw std::exception();
+			}
+			mat.ks.b = token_double;
+
+
+			// expect specular exponent
+
+			// expect double
+			if (!(iss >> token_double)) {
+				throw std::exception();
+			}
+
+			mat.specular_exp = token_double;
 
 		std::cout << "loaded " << mat << std::endl;
 
 		materials_.push_back(mat);
+		}
+
+
+		else if(token_str=="define shape"){
+			
+			if(token_str=="box"){
+				
+			}
+
+			}
+
+		else if(token_str=="define light"){
+
+		}
+
+		else if(token_str=="define camera"){
+
+		}
+
+
 
 	}
 }
