@@ -1,7 +1,8 @@
 #include "Box.hpp"
 #include "color.hpp"
 #include <glm/gtx/intersect.hpp>
-
+#include "Triangle.hpp"
+#include "Face.hpp"
 // TODO: anpassen
 Box::Box()
   : Shape{}, min_(0,0,0), max_(0,0,0), faces_()

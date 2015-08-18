@@ -16,6 +16,7 @@ int main(int argc, char* argv[])
     glm::vec3 offset(0, 0, 0);
     Box test_box(glm::vec3{-1.0,-1.0,5.0} + offset, glm::vec3{1.0,1.0,6.0} + offset,"testbox", black);
     Sphere test_kreis(glm::vec3{0.0,0.0,5.0}, 1.0,"testkreis", black);
+    Triangle test_triangle({1,0,5},{-1,0,5},{0,1,5});
 
   int win_size_x=400;
   int win_size_y=400;
@@ -44,7 +45,7 @@ while (!win.shouldClose()) {
 
       auto ray_dir = glm::normalize(glm::vec3{2*x-1, 2*y-1, focal_length});
       Ray charles(eye, ray_dir);
-      auto isec = test_kreis.intersect(charles);
+      auto isec = test_triangle.intersect(charles);
       
     
       if (isec.hit){
