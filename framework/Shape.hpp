@@ -8,12 +8,14 @@
 #include <glm/glm.hpp>
 #include "Ray.hpp"
 #include "intersection.hpp"
+#include <memory>
+#include <vector>
 
 class Shape{
 
 public:
 	Shape ();
-	Shape (std::string const& name, Material const& material);
+	Shape (std::string const& name, Material* const& material);
 
 	virtual Intersection intersect(Ray const& ray) const = 0; //pure virtual
 
@@ -23,7 +25,10 @@ public:
 
 
 	std::string const& getName() const;
-	Material const& getMaterial() const;
+	void setName(std::string x);
+	std::shared_ptr<Material> const& getMaterial() const;
+	void setMaterial(std::shared_ptr<Material> mat);
+
 
 
 	virtual void print(std::ostream& os) const;
@@ -38,7 +43,7 @@ public:
 
 protected:
 	std::string name_;
-	Material material_;
+	std::shared_ptr<Material> material_;
 
 };
 

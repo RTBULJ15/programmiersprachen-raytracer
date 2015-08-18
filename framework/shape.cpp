@@ -1,10 +1,12 @@
 #include "Shape.hpp"
+#include <memory>
+#include <vector>
 
 	Shape::Shape ()
 	: name_{"default"}, material_{}
 	{}
 
-	Shape::Shape (std::string const& name, Material const& material)
+	Shape::Shape (std::string const& name, Material* const& material)
 	: name_(name), material_(material)
 	{}
 
@@ -14,9 +16,12 @@
     }
 
 	std::string const& Shape::getName() const{return name_;}
-	Material const& Shape::getMaterial() const{return material_;}
+	void Shape::setName(std::string x) {name_ = x;}
 
-	void Shape::print(std::ostream& os) const { 
+	std::shared_ptr<Material> const& Shape::getMaterial() const{return material_;}
+        void Shape::setMaterial(std::shared_ptr<Material> mat) {material_ = mat;}
+
+	void Shape::print(std::ostream& os) const {
 		os<<"Name: "<<name_<<", Material: "<<material_<<std::endl;
-		
+
 	}

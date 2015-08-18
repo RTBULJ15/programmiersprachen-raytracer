@@ -11,10 +11,10 @@
 #include "intersection.hpp"
 
 class Composite/* : public Shape*/{
-	public: Composite();
+//	public: Composite();
             //void add_shape (Shape x);
             //Intersection intersect(Ray const& ray) const override;
-            ~Composite();
+//            ~Composite();
 
     private: //std::vector<Shape> shapes_;
 

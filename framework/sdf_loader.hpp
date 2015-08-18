@@ -6,12 +6,16 @@
 #include "scene.hpp"
 #include "Material.hpp"
 #include "light.hpp"
+#include "Shape.hpp"
+#include "Sphere.hpp"
+#include "Box.hpp"
+#include "renderer.hpp"
 
 class SDFLoader {
 
 public:
 	SDFLoader(std::string const& sdfpath);
-	Scene scene () const;
+	//Scene scene () const;
 private:
     Scene scene_;
 

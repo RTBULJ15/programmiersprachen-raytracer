@@ -29,7 +29,7 @@ TEST_CASE("Box", "[Box]"){
 
 	REQUIRE(box.area()==Approx(6.0f));
 	REQUIRE(box.volume()==Approx(1.0f));
-} */
+}
 
 TEST_CASE("intersectRaySphere", "[intersect]")
 {
@@ -55,7 +55,7 @@ TEST_CASE("intersectRaySphere", "[intersect]")
 TEST_CASE("Sphere intersect", "[intersect]")
 {
 
-	Material mat;
+	Material* mat = new Material();
 
 	Sphere s0{{0.0, 0.0, 0.0}, 1.0, "s0", mat};
 
@@ -76,8 +76,8 @@ TEST_CASE("Shape", "[destructor")
 {
 	Color red(255,0,0);
 
-	Material mat;
-	mat.kd = red;
+	Material* mat = new Material();
+	mat->kd = red;
 
 	glm::vec3 position(0,0,0);
 	Sphere* s1 = new Sphere(position, 1.2f, "sphere0", mat);
@@ -92,27 +92,31 @@ TEST_CASE("Shape", "[destructor")
 
 TEST_CASE("Box_inter", "[intersect]")
 {
-	Material mat;
+	Material* mat = new Material();
 	Box box1{{1.0,1.0,1.0},{1.2,2.0,2.0}, "karl", mat};
 	Ray charles{{0.0,0.0,0.0},{3.0,3.0,3.0}};
 	REQUIRE (box1.intersect(charles).hit);
+} */
+
+TEST_CASE("sdf loader", "[load]")
+{
+	SDFLoader loader("/opt/raytracer/2/programmiersprachen-raytracer/tests/scene.sdf");
+
+	/*for (auto mat: loader.materials()) {
+		std::cout << mat;
+	}*/
 }
 
-/*TEST_CASE("sdf loader", "[load]")
-{
-	SDFLoader loader("materials.sdf");
-	for (auto mat: loader.materials()) {
-		std::cout << mat;
-	}
-}*/
+
 
 int main(int argc, char *argv[])
 {
-	Material mat;
+  /*Material* mat = new Material();
   Sphere kugel{glm::vec3{0.0f,0.0f,0.0f},1.0f, "Koogle", mat};
   Box box{glm::vec3{0.0f,0.0f,0.0f},glm::vec3{0.0f,0.0f,0.0f}, "Box_1", mat};
   std::cout << kugel << std::endl << box << std::endl;
 
+	SDFLoader loader("/opt/raytracer/2/programmiersprachen-raytracer/source/tests/scene.sdf");
     /*SDFLoader loader("materials.sdf");
 	for (auto mat: loader.materials()) {
 		std::cout << mat

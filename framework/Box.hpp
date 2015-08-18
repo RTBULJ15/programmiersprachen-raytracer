@@ -114,13 +114,21 @@ class Box : public Shape{
 
 	public:
 		Box();
-		Box(glm::vec3 const& min, glm::vec3 const& max, std::string name, Material const& material);
+		Box(glm::vec3 const& min, glm::vec3 const& max, std::string name, Material* const& material);
 
 		/* virtual  float area() const override;
 		 virtual  float volume() const override; */
 
 		glm::vec3 getMin() const;
+		void setMin(glm::vec3 min);
+		void setMinx(double minx);
+		void setMiny(double miny);
+		void setMinz(double minz);
 		glm::vec3 getMax() const;
+		void setMax(glm::vec3 max);
+		void setMaxx(double maxx);
+		void setMaxy(double maxy);
+		void setMaxz(double maxz);
 
 		/* virtual */ void print(std::ostream&) const override;
 
@@ -130,7 +138,8 @@ class Box : public Shape{
 	private:
 		glm::vec3 min_;
 		glm::vec3 max_;
-
+        std::string name_;
+        //Material const& material_;
 		std::array<Face, 6> faces_;
 
 

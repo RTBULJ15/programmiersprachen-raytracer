@@ -11,7 +11,7 @@
 
 int main(int argc, char* argv[])
 {
- Material black;
+ Material* black = new Material();
  float depth = 100.0;
     glm::vec3 offset(0, 0, 0);
     Box test_box(glm::vec3{-1.0,-1.0,5.0} + offset, glm::vec3{1.0,1.0,6.0} + offset,"testbox", black);
@@ -35,7 +35,7 @@ win.update();
 
 
 while (!win.shouldClose()) {
-  #pragma omp parallel for collapse(2) 
+  #pragma omp parallel for collapse(2)
   for(int i=0; i<win_size_x; i++){
     for(int u=0; u<win_size_y; u++){
 
@@ -45,19 +45,19 @@ while (!win.shouldClose()) {
       auto ray_dir = glm::normalize(glm::vec3{2*x-1, 2*y-1, focal_length});
       Ray charles(eye, ray_dir);
       auto isec = test_kreis.intersect(charles);
-      
-    
+
+
       if (isec.hit){
-        win.drawPoint(x,y,glm::abs(std::cos(isec.normal.x)) * 255, 
-                          glm::abs(std::cos(isec.normal.y)) * 255, 
+        win.drawPoint(x,y,glm::abs(std::cos(isec.normal.x)) * 255,
+                          glm::abs(std::cos(isec.normal.y)) * 255,
                           glm::abs(std::cos(isec.normal.z)) * 255);
          }
       // else{
       //   win.drawPoint(x,y, 33.0,33.0,33.0);
       // }
-            
+
     }
-    
+
   }
   eye.y = 2.0 * std::sin(t);
   eye.x = 2.0 * std::cos(t);

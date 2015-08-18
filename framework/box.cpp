@@ -8,7 +8,7 @@ Box::Box()
 {}
 
 
-Box::Box(glm::vec3 const& p1, glm::vec3 const& p2, std::string name, Material const& material)
+Box::Box(glm::vec3 const& p1, glm::vec3 const& p2, std::string name, Material* const& material)
   : Shape(name, material)
   , min_(std::min(p1.x, p2.x), std::min(p1.y, p2.y), std::min(p1.z, p2.z))
   , max_(std::max(p1.x, p2.x), std::max(p1.y, p2.y), std::max(p1.z, p2.z))
@@ -66,9 +66,46 @@ Box::Box(glm::vec3 const& p1, glm::vec3 const& p2, std::string name, Material co
 glm::vec3 Box::getMin() const{
 	return min_;
 }
+void Box::setMin(glm::vec3 min)
+{
+    min_ = min;
+}
+void Box::setMinx(double minx)
+{
+    min_.x = minx;
+}
+void Box::setMiny(double miny)
+{
+    min_.y = miny;
+}
+void Box::setMinz(double minz)
+{
+    min_.z = minz;
+}
 glm::vec3 Box::getMax() const{
 	return max_;
 }
+void Box::setMax(glm::vec3 max)
+{
+    max_ = max;
+}
+void Box::setMaxx(double maxx)
+{
+    max_.x = maxx;
+}
+void Box::setMaxy(double maxy)
+{
+    max_.y = maxy;
+}
+void Box::setMaxz(double maxz)
+{
+    max_.z = maxz;
+}
+
+/*void setmaterial(std::string material)
+{
+    material_ = material;
+}*/
 
 /*float Box::area() const{
 

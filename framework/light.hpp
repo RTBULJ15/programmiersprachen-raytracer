@@ -7,14 +7,21 @@
 class Light
 {
 public:
-    Light();
-    Light(glm::vec3 position, Color ka , Color kd , Color ks);
+    Light(){};
+    Light(std::string name, glm::vec3 position/*, Color kd , Color ks*/){};
+    void setName (std::string name){};
+    void setPosition_x(double posx){};
+    void setPosition_y(double posy){};
+    void setPosition_z(double posz){};
+
+
 
 private:
-    glm::vec3 position;
-    Color ka;
-    Color kd;
-    Color ks;
+    std::string name_;
+    glm::vec3 position_;
+    //
+    /*Color kd;
+    Color ks;*/
 };
 
 #endif

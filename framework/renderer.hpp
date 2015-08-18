@@ -19,10 +19,15 @@
 class Renderer
 {
 public:
+
   Renderer(unsigned w, unsigned h, std::string const& file);
 
   void render();
   void write(Pixel const& p);
+
+  void setwidth(unsigned width);
+  void setheight(unsigned height);
+  void setfilename(std::string filename);
 
   inline std::vector<Color> const& colorbuffer() const
   {

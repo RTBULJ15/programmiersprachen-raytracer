@@ -10,13 +10,17 @@
 class Sphere : public Shape{
 	public:
 		Sphere();
-		Sphere(glm::vec3 const& center, float radiusr, std::string name, Material const& material);
+		Sphere(glm::vec3 const& center, float radiusr, std::string name, Material* const& material);
 
 		/* virtual  float area() const ;
 		virtual  float volume() const override;*/
 
 		glm::vec3 getcenter() const;
+		void setcenter_x(double centerx);
+		void setcenter_y(double centery);
+		void setcenter_z(double centerz);
 		float getradius() const;
+		void setradius(double radius);
 
 		Intersection intersect(Ray const& ray) const override;
 
