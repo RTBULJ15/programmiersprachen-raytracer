@@ -1,0 +1,67 @@
+Start testing: Aug 20 08:44 EDT
+----------------------------------------------------------
+1/1 Testing: tests
+1/1 Test: tests
+Command: "/opt/raytracer/2/programmiersprachen-raytracer/source/build/Release/tests"
+Directory: /opt/raytracer/2/programmiersprachen-raytracer/source
+"tests" start time: Aug 20 08:44 EDT
+Output:
+----------------------------------------------------------
+loading /opt/raytracer/2/programmiersprachen-raytracer/tests/scene.sdf
+line retrieved: # materials
+iss >> token_str: #
+line retrieved: define material red 1 0 0 1 0 0 1 0 0 1
+iss >> token_str: define
+is define:define
+is material:material
+material name: red
+specexponent: 1
+materialslength: 0
+line retrieved: define material blue 0 0 1 0 0 1 0 0 1 1
+iss >> token_str: define
+is define:define
+is material:material
+material name: blue
+specexponent: 1
+materialslength: 0
+line retrieved: # geometry
+iss >> token_str: #
+line retrieved: define shape box rbottom -100 -80 -200 100 80 -100 red
+iss >> token_str: define
+is define:define
+is shape: shape
+line retrieved: define shape sphere bsphere 0 0 -100 50 blue
+iss >> token_str: define
+is define:define
+is shape: shape
+line retrieved: # light - from right above
+iss >> token_str: #
+line retrieved: define light sun 1000 700 0 .2 .2 .2 .8 .8 .8
+iss >> token_str: define
+is define:define
+is light: light
+line retrieved: # camera
+iss >> token_str: #
+line retrieved: define camera eye 45.0
+iss >> token_str: define
+is define:define
+is camera: camera
+line retrieved: # ... and go
+iss >> token_str: #
+line retrieved: render eye image.ppm 480 320
+iss >> token_str: render
+is renderer: render
+line retrieved: 
+===============================================================================
+test cases: 1 | 1 passed
+assertions: - none -
+
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"tests" end time: Aug 20 08:44 EDT
+"tests" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Aug 20 08:44 EDT

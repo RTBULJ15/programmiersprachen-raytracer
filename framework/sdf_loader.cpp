@@ -142,6 +142,8 @@ SDFLoader::SDFLoader (std::string const& sdfpath)
                         else if (token_str == "shape")
                         {
                             std::cout << "is shape: " << token_str << std::endl;
+
+                            iss >> token_str;
                             if (!(iss >> token_str))
                                 {
                                     throw std::exception();
@@ -157,6 +159,8 @@ SDFLoader::SDFLoader (std::string const& sdfpath)
                                    throw std::exception();
                                }
                                box->setName(token_str);
+                               //std::string boxname = token_str;
+
 
                                //expect min_.x
                                //expect double
@@ -165,6 +169,7 @@ SDFLoader::SDFLoader (std::string const& sdfpath)
                                    throw std::exception();
                                }
                                box->setMinx(token_double);
+                               //double boxminx = token_double;
 
                                //expect min_.y
                                //expect double
@@ -173,6 +178,7 @@ SDFLoader::SDFLoader (std::string const& sdfpath)
                                    throw std::exception();
                                }
                                box->setMiny(token_double);
+                               //double boxminy = token_double;
 
                                //expect min_.z
                                //expect double
@@ -181,24 +187,28 @@ SDFLoader::SDFLoader (std::string const& sdfpath)
                                    throw std::exception();
                                }
                                box->setMinz(token_double);
+                               //glm::vec3 boxmin (boxminx, boxminy, token_double);
 
                                if (!(iss >> token_double))
                                {
                                    throw std::exception();
                                }
                                box->setMaxx(token_double);
+                               //double boxmaxx = token_double;
 
                                if (!(iss >> token_double))
                                {
                                    throw std::exception();
                                }
                                box->setMaxy(token_double);
+                               //double boxmaxy = token_double;
 
                                if (!(iss >> token_double))
                                {
                                    throw std::exception();
                                }
                                box->setMaxz(token_double);
+                               //glm::vec3 boxmax (boxmaxx, boxmaxy, token_double);
 
                                if (!(iss >> token_str))
                                {
@@ -216,6 +226,7 @@ SDFLoader::SDFLoader (std::string const& sdfpath)
                                         {
                                             foundmat = true;
                                             box->setMaterial(*it);
+                                            //std::shared_ptr<Material> boxmat = *it; // geht nicht,  wiesoo??
                                         }
 
 
@@ -226,7 +237,7 @@ SDFLoader::SDFLoader (std::string const& sdfpath)
                                     throw std::exception();
                                 }
 
-
+                                //Box(boxmin, boxmax, boxname, boxmat);
                             }
 
                             else if (token_str == "sphere")
