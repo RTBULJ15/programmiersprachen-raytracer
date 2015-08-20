@@ -10,7 +10,7 @@ Sphere::Sphere()
 {}
 
 
-Sphere::Sphere(glm::vec3 const& center, float radius, std::string name, Material* const& material)
+Sphere::Sphere(glm::vec3 const& center, float radius, std::string name, std::shared_ptr<Material> const& material)
   : Shape(name, material), center_(center), radius_(radius) //Shape::setName(name), Shape::setColor(color)
 {}
 

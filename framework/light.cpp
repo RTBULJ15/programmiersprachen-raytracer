@@ -1,4 +1,8 @@
-Light()
+#include <iostream>
+#include <string>
+#include "light.hpp"
+
+Light::Light()
 {
 
 }
@@ -8,22 +12,22 @@ Light()
 
 }*/
 
-void setName (std::string name)
+void Light::setName (std::string name)
 {
     name_ = name;
 }
 
-void setPosition_x(double posx)
+void Light::setPosition_x(double posx)
 {
     position_.x = posx;
 }
 
-void setPosition_y(double posy)
+void Light::setPosition_y(double posy)
 {
     position_.y = posy;
 }
 
-void setPosition_z(double posz)
+void Light::setPosition_z(double posz)
 {
     position_.z = posz;
 }

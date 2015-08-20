@@ -10,7 +10,7 @@
 #include "intersection.hpp"
 #include "Face.hpp"
 #include "Triangle.hpp"
-// #include "Trianglebox.hpp"
+#include "Trianglebox.hpp"
 
 
 class Box : public Shape{
@@ -24,8 +24,9 @@ class Box : public Shape{
 
 		
 	public:
+                Box(glm::vec3 const& p1, glm::vec3 const& p2, std::string name, std::shared_ptr<Material> const& material);
 		Box();
-		Box(glm::vec3 const& min, glm::vec3 const& max, std::string name, Material* const& material);
+		//Box(glm::vec3 const& min, glm::vec3 const& max, std::string name, Material* const& material);
 
 		/* virtual  float area() const override;
 		 virtual  float volume() const override; */
@@ -49,8 +50,8 @@ class Box : public Shape{
 	private:
 		glm::vec3 min_;
 		glm::vec3 max_;
-        std::string name_;
-        //Material const& material_;
+       		 std::string name_;
+        	//Material const& material_;
 		std::array<Face, 6> faces_;
 
 

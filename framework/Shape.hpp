@@ -15,7 +15,7 @@ class Shape{
 
 public:
 	Shape ();
-	Shape (std::string const& name, Material* const& material);
+	Shape (std::string const& name, std::shared_ptr<Material> const& material);
 
 	virtual Intersection intersect(Ray const& ray) const = 0; //pure virtual
 

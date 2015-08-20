@@ -9,7 +9,7 @@ Box::Box()
 {}
 
 
-Box::Box(glm::vec3 const& p1, glm::vec3 const& p2, std::string name, Material* const& material)
+Box::Box(glm::vec3 const& p1, glm::vec3 const& p2, std::string name, std::shared_ptr<Material> const& material)
   : Shape(name, material)
   , min_(std::min(p1.x, p2.x), std::min(p1.y, p2.y), std::min(p1.z, p2.z))
   , max_(std::max(p1.x, p2.x), std::max(p1.y, p2.y), std::max(p1.z, p2.z))
@@ -137,12 +137,11 @@ void Box::print(std::ostream& os) const{
 
 Intersection Box::intersect(Ray const& ray) const{
 	Intersection isec;
-	for (auto f: faces_) {
-		auto cur_isec = f.intersect(ray);
-		if (cur_isec.hit && ((isec.hit && cur_isec.t < isec.t) || !isec.hit)) {
-			isec = cur_isec;
-		}
-	}
+//	for (auto f: faces_) {
+//		auto cur_isec = f.intersect(ray);
+//		if (cur_isec.hit && ((isec.hit && cur_isec.t < isec.t) || !isec.hit)) {
+//			isec = cur_isec;
+//		}/	}
 	return isec;
 }
 

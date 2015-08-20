@@ -15,7 +15,7 @@ Scene::Scene()
 //{
 //}
 
-std::vector<Material*> get_materials()
+MaterialContainer Scene::get_materials()
 {
     return materials;
 

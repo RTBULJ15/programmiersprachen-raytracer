@@ -9,29 +9,21 @@
 #include "intersection.hpp"
 
 
-class Triangle : public Shape{
+class Triangle : public Shape
+{
 	
 		public:
-		
-		Triangle();
-
-		Triangle(glm::vec3 const& u, glm::vec3 const& v, glm::vec3 const& w);
-
+			Triangle();
+			Triangle(glm::vec3 const& u, glm::vec3 const& v, glm::vec3 const& w);
 			glm::vec3 v1 () const;
-
 			glm::vec3 v2 () const;
-
 			glm::vec3 v3 () const;
 
-
 			Intersection intersect (Ray const& ray) const;
-
-
-
 			glm::vec3 barycentric_to_world (glm::vec3 const& bary) const;
 
 		private:
 			glm::vec3 v1_, v2_, v3_, n_;
-		};
+};
 
 #endif

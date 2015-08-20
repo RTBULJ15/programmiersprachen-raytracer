@@ -27,7 +27,8 @@ Triangle::v3 () const {
 
 
 Intersection 
-Triangle::intersect (Ray const& ray) const {
+Triangle::intersect (Ray const& ray) const 
+{
 	glm::vec3 bary;
 	Intersection isec;
 
@@ -47,7 +48,8 @@ Triangle::intersect (Ray const& ray) const {
 }
 
 glm::vec3 
-Triangle::barycentric_to_world (glm::vec3 const& bary) const {
+Triangle::barycentric_to_world (glm::vec3 const& bary) const 
+{
 	glm::vec3 result;
 	double u, v, w;
 

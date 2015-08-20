@@ -5,7 +5,6 @@
 
 class Face {
 		public:
-
 			Face() : t1_(), t2_() {}
  			Face(Triangle const& a, Triangle const& b) : t1_(a), t2_(b) {}
 
