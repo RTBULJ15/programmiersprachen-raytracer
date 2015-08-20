@@ -1,33 +1,35 @@
-#include <iostream>
-#include <string>
 #include "light.hpp"
 
-Light::Light()
-{
+    Light::Light()
+    :	position_(), ka_(), kd_()
+    {};
 
-}
+    Light::Light(std::string const& name, glm::vec3 const& position, glm::vec3 const& ka , glm::vec3 const& kd)
+    : name_(name), position_(position), ka_(ka), kd_(kd)
+    {};
 
-/*Light(std::string name, glm::vec3 position, Color kd , Color ks);
-{
+    glm::vec3 Light::getPos() const
+    {
+    	return position_;
+    }; 
 
-}*/
 
-void Light::setName (std::string name)
-{
-    name_ = name;
-}
+	void Light::setName (std::string name) &
+	{
+	    name_ = name;
+	};
 
-void Light::setPosition_x(double posx)
-{
-    position_.x = posx;
-}
+	void Light::setPosition_x(double const& posx) &
+	{
+	    position_.x = posx;
+	};
 
-void Light::setPosition_y(double posy)
-{
-    position_.y = posy;
-}
+	void Light::setPosition_y(double const& posy) &
+	{
+	    position_.y = posy;
+	};
 
-void Light::setPosition_z(double posz)
-{
-    position_.z = posz;
-}
+	void Light::setPosition_z(double const& posz) &
+	{
+	    position_.z = posz;
+	};
