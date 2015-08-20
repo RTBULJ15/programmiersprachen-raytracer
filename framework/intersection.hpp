@@ -2,6 +2,9 @@
 #define BUW_INTERSECTION_HPP
 
 #include <glm/glm.hpp>
+#include <iostream>
+#include <string>
+
 struct Intersection
 {
 	Intersection () : hit(false), t(-1), position(), normal() {}
@@ -22,5 +25,14 @@ struct Intersection
 	glm::vec3 normal;
 
 };
+
+// std::ostream& operator << (std::ostream& o, Intersection const& intersection)
+// 	  {
+// 	  // o << "Position" << intersection.position[0] << " " << intersection.position[1] << " " << intersection.position[2] << std::endl;
+// 	  o << "Position" << intersection.position[0] << std::endl;
+
+// 	  return o;
+// 	  }
+
 
 #endif // BUW_INTERSECTION_HPP

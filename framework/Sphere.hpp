@@ -25,6 +25,9 @@ class Sphere : public Shape{
 		Intersection intersect(Ray const& ray) const override;
 
 		/* virtual */ void print(std::ostream&) const override;
+
+		glm::vec3 kreisNormale(glm::vec3 const& mittelpunkt, glm::vec3 const& surface) const;
+		
 		~Sphere();
 
 	private:

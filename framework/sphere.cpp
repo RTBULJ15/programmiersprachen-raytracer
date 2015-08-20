@@ -42,6 +42,13 @@ void Sphere::setradius(double radius)
     radius_ = radius;
 }
 
+ glm::vec3 Sphere::kreisNormale(glm::vec3 const& mittelpunkt, glm::vec3 const& surface) const{
+    glm::vec3 ausgabe;
+      ausgabe[0]=surface[0]-mittelpunkt[0];
+      ausgabe[1]=surface[1]-mittelpunkt[1];
+      ausgabe[2]=surface[2]-mittelpunkt[2];
+    return ausgabe;
+  }
 /*float Sphere::area() const{
   return 4.0*M_PI*(radius_*radius_);
 }
@@ -56,6 +63,13 @@ void Sphere::print(std::ostream& os) const{
 }
 
 Intersection Sphere::intersect(Ray const& ray) const {
+	//Schnittpunkt berechnen
+	glm::vec3 L= Sphere::kreisNormale(ray.origin, center_);
+	float tc= glm::dot(L, ray.direction);
+	float d = sqrt(glm::length((tc*tc) - (L*L)));
+	float t1c = sqrt((radius_ * radius_) - (d*d));
+	float t1 = tc - t1c;
+	glm::vec3 P1 = (ray.origin + ray.direction) * t1; //<--Schnittpunkt
 
 	Intersection intersect;
 	intersect.hit = glm::intersectRaySphere(
@@ -63,6 +77,7 @@ Intersection Sphere::intersect(Ray const& ray) const {
 		center_, radius_, 						// sphere parameters
 		intersect.position, intersect.normal 	// return per reference
 	);
+	intersect.position = P1;
 
 	return intersect;
 }
