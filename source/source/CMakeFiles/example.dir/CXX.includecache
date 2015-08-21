@@ -755,6 +755,16 @@ window.hpp
 ../framework/intersection.hpp
 glm/glm.hpp
 -
+iostream
+-
+string
+-
+
+../framework/light.hpp
+glm/vec3.hpp
+../framework/glm/vec3.hpp
+string
+-
 
 ../framework/pixel.hpp
 iosfwd
@@ -805,4 +815,6 @@ intersection.hpp
 /opt/raytracer/2/programmiersprachen-raytracer/source/intersection.hpp
 Sphere.hpp
 /opt/raytracer/2/programmiersprachen-raytracer/source/Sphere.hpp
+light.hpp
+/opt/raytracer/2/programmiersprachen-raytracer/source/light.hpp
 

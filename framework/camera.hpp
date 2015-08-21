@@ -10,7 +10,7 @@ class Camera
 {
 public:
     Camera();
-    Camera(std::string name,double horizontal_apex_angle, glm::ivec2 resolution);
+    Camera(std::string name,double horizontal_apex_angle/*, glm::ivec2 resolution*/);
     void setname(std::string name);
     void setangle(double angle);
     void setResolution_x(double resx);
@@ -18,8 +18,8 @@ public:
 
 private:
     std::string name_;
-    double horizontal_apex_angle;
-    glm::ivec2 resolution;
+    double horizontal_apex_angle_;
+    //glm::ivec2 resolution;
 };
 
 #endif

@@ -277,7 +277,6 @@ framework/CMakeFiles/framework.dir/light.cpp.o: ../external/glm-0.9.5.3/glm/deta
 framework/CMakeFiles/framework.dir/light.cpp.o: ../external/glm-0.9.5.3/glm/detail/type_vec3.hpp
 framework/CMakeFiles/framework.dir/light.cpp.o: ../external/glm-0.9.5.3/glm/detail/type_vec3.inl
 framework/CMakeFiles/framework.dir/light.cpp.o: ../external/glm-0.9.5.3/glm/vec3.hpp
-framework/CMakeFiles/framework.dir/light.cpp.o: ../framework/color.hpp
 framework/CMakeFiles/framework.dir/light.cpp.o: ../framework/light.cpp
 framework/CMakeFiles/framework.dir/light.cpp.o: ../framework/light.hpp
 

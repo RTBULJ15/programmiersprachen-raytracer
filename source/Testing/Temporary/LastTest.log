@@ -1,10 +1,10 @@
-Start testing: Aug 20 08:44 EDT
+Start testing: Aug 21 06:06 EDT
 ----------------------------------------------------------
 1/1 Testing: tests
 1/1 Test: tests
 Command: "/opt/raytracer/2/programmiersprachen-raytracer/source/build/Release/tests"
 Directory: /opt/raytracer/2/programmiersprachen-raytracer/source
-"tests" start time: Aug 20 08:44 EDT
+"tests" start time: Aug 21 06:06 EDT
 Output:
 ----------------------------------------------------------
 loading /opt/raytracer/2/programmiersprachen-raytracer/tests/scene.sdf
@@ -15,6 +15,16 @@ iss >> token_str: define
 is define:define
 is material:material
 material name: red
+materialname:red
+material_ka_r:1
+material_ka_g:0
+material_ka_b:0
+material_kd_r:1
+material_kd_g:0
+material_kd_b:0
+material_ks_r:1
+material_ks_g:0
+material_ks_b:0
 specexponent: 1
 materialslength: 0
 line retrieved: define material blue 0 0 1 0 0 1 0 0 1 1
@@ -22,6 +32,16 @@ iss >> token_str: define
 is define:define
 is material:material
 material name: blue
+materialname:blue
+material_ka_r:0
+material_ka_g:0
+material_ka_b:1
+material_kd_r:0
+material_kd_g:0
+material_kd_b:1
+material_ks_r:0
+material_ks_g:0
+material_ks_b:1
 specexponent: 1
 materialslength: 0
 line retrieved: # geometry
@@ -57,11 +77,11 @@ test cases: 1 | 1 passed
 assertions: - none -
 
 <end of output>
-Test time =   0.02 sec
+Test time =   0.04 sec
 ----------------------------------------------------------
 Test Passed.
-"tests" end time: Aug 20 08:44 EDT
+"tests" end time: Aug 21 06:06 EDT
 "tests" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Aug 20 08:44 EDT
+End testing: Aug 21 06:06 EDT

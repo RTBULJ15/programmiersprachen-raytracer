@@ -62,7 +62,7 @@ SDFLoader::SDFLoader (std::string const& sdfpath)
                             std::cout << "material name: " << token_str << std::endl;
 
                             mat->name = token_str;
-
+                            std::cout << "materialname:" << token_str << std::endl;
                             // expect ambient color
 
                             // expect double
@@ -70,18 +70,21 @@ SDFLoader::SDFLoader (std::string const& sdfpath)
                                 throw std::exception();
                             }
                             mat->ka.r = token_double;
+                            std::cout << "material_ka_r:" << token_double << std::endl;
 
                             // expect double
                             if (!(iss >> token_double)) {
                                 throw std::exception();
                             }
                             mat->ka.g = token_double;
+                            std::cout << "material_ka_g:" << token_double << std::endl;
 
                             // expect double
                             if (!(iss >> token_double)) {
                                 throw std::exception();
                             }
                             mat->ka.b = token_double;
+                            std::cout << "material_ka_b:" << token_double << std::endl;
 
 
 
@@ -92,18 +95,21 @@ SDFLoader::SDFLoader (std::string const& sdfpath)
                                 throw std::exception();
                             }
                             mat->kd.r = token_double;
+                            std::cout << "material_kd_r:" << token_double << std::endl;
 
                             // expect double
                             if (!(iss >> token_double)) {
                                 throw std::exception();
                             }
                             mat->kd.g = token_double;
+                            std::cout << "material_kd_g:" << token_double << std::endl;
 
                             // expect double
                             if (!(iss >> token_double)) {
                                 throw std::exception();
                             }
                             mat->kd.b = token_double;
+                            std::cout << "material_kd_b:" << token_double << std::endl;
 
                             // expect specular color
 
@@ -112,18 +118,21 @@ SDFLoader::SDFLoader (std::string const& sdfpath)
                                 throw std::exception();
                             }
                             mat->ks.r = token_double;
+                            std::cout << "material_ks_r:" << token_double << std::endl;
 
                             // expect double
                             if (!(iss >> token_double)) {
                                 throw std::exception();
                             }
                             mat->ks.g = token_double;
+                            std::cout << "material_ks_g:" << token_double << std::endl;
 
                             // expect double
                             if (!(iss >> token_double)) {
                                 throw std::exception();
                             }
                             mat->ks.b = token_double;
+                            std::cout << "material_ks_b:" << token_double << std::endl;
 
 
                             // expect specular exponent
@@ -318,30 +327,31 @@ SDFLoader::SDFLoader (std::string const& sdfpath)
                                     // Behandle die einzelnen Typen getrennt nach Typ
                         {
                             std::cout << "is light: " << token_str << std::endl;
-                            Light* light = new Light;
+                            //Light* light = new Light;
                             if (!(iss >> token_str))
                             {
                                 throw std::exception();
                             }
-                            light-> setName(token_str);
+                            std::string lightname = token_str;
 
                             if (!(iss >> token_double))
                             {
                                 throw std::exception();
                             }
-                            light-> setPosition_x(token_double);
+                            double position_x = token_double;
 
                             if (!(iss >> token_double))
                             {
                                 throw std::exception();
                             }
-                            light-> setPosition_y(token_double);
+                            double position_y = token_double;
 
                             if (!(iss >> token_double))
                             {
                                 throw std::exception();
                             }
-                            light-> setPosition_z(token_double);
+                            double position_z = token_double;
+                            glm::vec3 position(position_x, position_y, position_z);
 
                             if (!(iss >> token_double))
                             {
@@ -349,60 +359,66 @@ SDFLoader::SDFLoader (std::string const& sdfpath)
                             }
                             // ambientes licht wird anscheinenfd woanders  (scene) abgespeichert
 
-                            //light.kd.r = token_double;
+                            float ka_x = token_double;
 
                             if (!(iss >> token_double))
                             {
                                 throw std::exception();
                             }
 
-                            //light.kd.g = token_double;
+                            float ka_y = token_double;
 
                             if (!(iss >> token_double))
                             {
                                 throw std::exception();
                             }
 
-                            //light.kd.b = token_double;
+                            float ka_z = token_double;
+                            glm::vec3 ka(ka_x, ka_y, ka_z);
 
                             if (!(iss >> token_double))
                             {
                                 throw std::exception();
                             }
 
-                            //light.ks.r = token_double;
+                            float kd_x = token_double;
 
                             if (!(iss >> token_double))
                             {
                                 throw std::exception();
                             }
 
-                            //light.ks.g = token_double;
+                            float kd_y = token_double;
 
                             if (!(iss >> token_double))
                             {
                                 throw std::exception();
                             }
 
-                            //light.ks. = token_double;
+                            float kd_z = token_double;
 
+                            glm::vec3 kd(kd_x, kd_y, kd_z);
+
+                            Light light(lightname, position, ka, kd);
                         }
 
                         else if (token_str == "camera")
                         {
                             std::cout << "is camera: " << token_str << std::endl;
-                            Camera* camera = new Camera();
+                            //Camera* camera = new Camera();
                             if (!(iss >> token_str))
                             {
                                 throw std::exception();
                             }
-                            camera->setname(token_str);
+                            std::string cameraname = token_str;
 
                             if (!(iss >> token_double))
                             {
                                 throw std::exception();
                             }
-                            camera->setangle(token_double);
+                            double cameraangle = token_double;
+
+                            Camera camera(cameraname, cameraangle);
                         }
                         else
                         {

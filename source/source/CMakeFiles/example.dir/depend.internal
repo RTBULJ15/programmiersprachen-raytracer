@@ -97,6 +97,7 @@ source/CMakeFiles/example.dir/example.cpp.o
  ../framework/color.hpp
  ../framework/fensterchen.hpp
  ../framework/intersection.hpp
+ ../framework/light.hpp
  ../framework/pixel.hpp
  ../framework/ppmwriter.hpp
  ../framework/window.hpp

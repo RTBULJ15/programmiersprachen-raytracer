@@ -22,7 +22,7 @@ class Box : public Shape{
 		// 	float b;
 		// };
 
-		
+
 	public:
                 Box(glm::vec3 const& p1, glm::vec3 const& p2, std::string name, std::shared_ptr<Material> const& material);
 		Box();
@@ -32,15 +32,15 @@ class Box : public Shape{
 		 virtual  float volume() const override; */
 
 		glm::vec3 getMin() const;
-		void setMin(glm::vec3 min);
-		void setMinx(double minx);
-		void setMiny(double miny);
-		void setMinz(double minz);
+		void setMin(glm::vec3 const& min);
+		void setMinx(double const& minx);
+		void setMiny(double const& miny);
+		void setMinz(double const& minz);
 		glm::vec3 getMax() const;
-		void setMax(glm::vec3 max);
-		void setMaxx(double maxx);
-		void setMaxy(double maxy);
-		void setMaxz(double maxz);
+		void setMax(glm::vec3 const& max);
+		void setMaxx(double const& maxx);
+		void setMaxy(double const& maxy);
+		void setMaxz(double const& maxz);
 
 		/* virtual */ void print(std::ostream&) const override;
 

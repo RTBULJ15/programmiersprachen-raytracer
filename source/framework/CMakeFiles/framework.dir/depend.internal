@@ -278,7 +278,6 @@ framework/CMakeFiles/framework.dir/light.cpp.o
  ../external/glm-0.9.5.3/glm/detail/type_vec3.hpp
  ../external/glm-0.9.5.3/glm/detail/type_vec3.inl
  ../external/glm-0.9.5.3/glm/vec3.hpp
- /opt/raytracer/2/programmiersprachen-raytracer/framework/color.hpp
  /opt/raytracer/2/programmiersprachen-raytracer/framework/light.cpp
  /opt/raytracer/2/programmiersprachen-raytracer/framework/light.hpp
 framework/CMakeFiles/framework.dir/pixel.cpp.o

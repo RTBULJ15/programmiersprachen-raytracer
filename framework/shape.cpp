@@ -11,7 +11,7 @@
 	{}
 
 	Shape::~Shape()
-    	{	
+    	{
         std::cout << "~Shape destructor called" << std::endl;
     	}
 

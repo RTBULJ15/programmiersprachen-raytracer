@@ -17,14 +17,14 @@ class Scene
  public:
     Scene();
     //Scene(Color amb_light, std::vector<Light> lights, Camera cam , Composite comp);
-    Camera get_camera();
+    Camera const& get_camera();
     /*get_amb_light();
     get_lights();
     get_cam();
     get_comp(); */
     	/* : lights{}
 	, composite{} */
-    MaterialContainer  get_materials();
+    MaterialContainer get_materials();
  private:
     Color amb_light;
     std::vector<Light> lights;

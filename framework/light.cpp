@@ -11,10 +11,10 @@
     glm::vec3 Light::getPos() const
     {
     	return position_;
-    }; 
+    };
 
 
-	void Light::setName (std::string name) &
+	/*void Light::setName (std::string name) &
 	{
 	    name_ = name;
 	};
@@ -32,4 +32,4 @@
 	void Light::setPosition_z(double const& posz) &
 	{
 	    position_.z = posz;
-	};
+	};*/

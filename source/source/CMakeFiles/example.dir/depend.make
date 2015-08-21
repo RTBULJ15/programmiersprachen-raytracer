@@ -96,6 +96,7 @@ source/CMakeFiles/example.dir/example.cpp.o: ../framework/Trianglebox.hpp
 source/CMakeFiles/example.dir/example.cpp.o: ../framework/color.hpp
 source/CMakeFiles/example.dir/example.cpp.o: ../framework/fensterchen.hpp
 source/CMakeFiles/example.dir/example.cpp.o: ../framework/intersection.hpp
+source/CMakeFiles/example.dir/example.cpp.o: ../framework/light.hpp
 source/CMakeFiles/example.dir/example.cpp.o: ../framework/pixel.hpp
 source/CMakeFiles/example.dir/example.cpp.o: ../framework/ppmwriter.hpp
 source/CMakeFiles/example.dir/example.cpp.o: ../framework/window.hpp
