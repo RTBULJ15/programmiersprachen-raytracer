@@ -15,8 +15,7 @@ Scene::Scene()
 //{
 //}
 
-MaterialContainer Scene::get_materials()
+MaterialContainer& Scene::get_materials()
 {
     return materials;
-
 }

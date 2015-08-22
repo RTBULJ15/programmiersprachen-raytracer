@@ -24,7 +24,7 @@ class Scene
     get_comp(); */
     	/* : lights{}
 	, composite{} */
-    MaterialContainer get_materials();
+    MaterialContainer& get_materials();
  private:
     Color amb_light;
     std::vector<Light> lights;
