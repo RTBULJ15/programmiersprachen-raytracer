@@ -438,7 +438,7 @@ SDFLoader::SDFLoader (std::string const& sdfpath)
         {
         // Do the render stuff
             std::cout << "is renderer: " << token_str << std::endl;
-            Renderer* renderer = new Renderer(640,780,"image.ppm");
+            //Renderer* renderer = new Renderer(640,780,"image.ppm");
 
             if (!(iss >> token_str))
             {
@@ -450,21 +450,22 @@ SDFLoader::SDFLoader (std::string const& sdfpath)
                 throw std::exception();
             }
 
-            renderer->setfilename(token_str);
+            std::string filename = token_str;
 
             if (!(iss >> token_double))
             {
                 throw std::exception();
             }
 
-            renderer->setwidth(token_double);
+            double width = token_double;
 
             if (!(iss >> token_double))
             {
                 throw std::exception();
             }
 
-            renderer->setheight(token_double);
+            double height = token_double;
+            Renderer renderer(width, height, filename);
 
 		}
 		else if(token_str=="transform") // for eSDF (Extended SDF)

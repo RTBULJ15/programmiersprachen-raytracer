@@ -1,10 +1,10 @@
-Start testing: Aug 22 10:22 EDT
+Start testing: Aug 22 10:53 EDT
 ----------------------------------------------------------
 1/1 Testing: tests
 1/1 Test: tests
 Command: "/opt/raytracer/2/programmiersprachen-raytracer/source/build/Release/tests"
 Directory: /opt/raytracer/2/programmiersprachen-raytracer/source
-"tests" start time: Aug 22 10:22 EDT
+"tests" start time: Aug 22 10:53 EDT
 Output:
 ----------------------------------------------------------
 loading /opt/raytracer/2/programmiersprachen-raytracer/tests/scene.sdf
@@ -77,11 +77,11 @@ test cases: 1 | 1 passed
 assertions: - none -
 
 <end of output>
-Test time =   0.02 sec
+Test time =   0.01 sec
 ----------------------------------------------------------
 Test Passed.
-"tests" end time: Aug 22 10:22 EDT
+"tests" end time: Aug 22 10:53 EDT
 "tests" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Aug 22 10:22 EDT
+End testing: Aug 22 10:53 EDT
