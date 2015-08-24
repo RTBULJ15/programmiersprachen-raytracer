@@ -466,6 +466,7 @@ SDFLoader::SDFLoader (std::string const& sdfpath)
 
             double height = token_double;
             Renderer renderer(width, height, filename);
+            renderer.render();
 
 		}
 		else if(token_str=="transform") // for eSDF (Extended SDF)
@@ -478,6 +479,14 @@ SDFLoader::SDFLoader (std::string const& sdfpath)
 	}
 
 }
+
+//jedes shape auf hits prüfen, loop über size von shape container
+//hit intersection vector
+//vector sortienen , kürzest entfernte punkte finden
+//gefundene Punkte speichern in vector oder list
+// über vector loopen und intersect durchführen mit lichtquelle
+//punkt liegt in schatten oder licht
+//punkte mit farben abspeichern
 
 /*Scene
 SDFLoader::scene () const

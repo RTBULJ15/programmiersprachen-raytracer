@@ -680,6 +680,10 @@ Ray.hpp
 intersection.hpp
 /opt/raytracer/2/programmiersprachen-raytracer/framework/intersection.hpp
 
+/opt/raytracer/2/programmiersprachen-raytracer/framework/Triangle.cpp
+Triangle.hpp
+/opt/raytracer/2/programmiersprachen-raytracer/framework/Triangle.hpp
+
 /opt/raytracer/2/programmiersprachen-raytracer/framework/Triangle.hpp
 array
 -
@@ -697,6 +701,18 @@ intersection.hpp
 /opt/raytracer/2/programmiersprachen-raytracer/framework/Trianglebox.hpp
 glm/glm.hpp
 -
+
+/opt/raytracer/2/programmiersprachen-raytracer/framework/box.cpp
+Box.hpp
+/opt/raytracer/2/programmiersprachen-raytracer/framework/Box.hpp
+color.hpp
+/opt/raytracer/2/programmiersprachen-raytracer/framework/color.hpp
+glm/gtx/intersect.hpp
+-
+Triangle.hpp
+/opt/raytracer/2/programmiersprachen-raytracer/framework/Triangle.hpp
+Face.hpp
+/opt/raytracer/2/programmiersprachen-raytracer/framework/Face.hpp
 
 /opt/raytracer/2/programmiersprachen-raytracer/framework/camera.hpp
 iostream
@@ -747,10 +763,6 @@ vector
 -
 pixel.hpp
 -
-
-/opt/raytracer/2/programmiersprachen-raytracer/framework/renderer.cpp
-renderer.hpp
-/opt/raytracer/2/programmiersprachen-raytracer/framework/renderer.hpp
 
 /opt/raytracer/2/programmiersprachen-raytracer/framework/renderer.hpp
 color.hpp
@@ -833,4 +845,22 @@ Box.hpp
 /opt/raytracer/2/programmiersprachen-raytracer/framework/Box.hpp
 renderer.hpp
 /opt/raytracer/2/programmiersprachen-raytracer/framework/renderer.hpp
+
+/opt/raytracer/2/programmiersprachen-raytracer/framework/shape.cpp
+Shape.hpp
+/opt/raytracer/2/programmiersprachen-raytracer/framework/Shape.hpp
+memory
+-
+vector
+-
+
+/opt/raytracer/2/programmiersprachen-raytracer/framework/sphere.cpp
+cmath
+-
+Sphere.hpp
+/opt/raytracer/2/programmiersprachen-raytracer/framework/Sphere.hpp
+color.hpp
+/opt/raytracer/2/programmiersprachen-raytracer/framework/color.hpp
+glm/gtx/intersect.hpp
+-
 

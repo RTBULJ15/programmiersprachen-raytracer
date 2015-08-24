@@ -18,4 +18,5 @@ Scene::Scene()
 MaterialContainer& Scene::get_materials()
 {
     return materials;
+
 }
