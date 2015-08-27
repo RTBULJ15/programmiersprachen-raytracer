@@ -1,7 +1,7 @@
-
+#include "raycaster.hpp"
 
 Raycaster::Raycaster()
-:camera{}, scene{}
+:camera_{}, scene_{}
 {}
 
 Raycaster::Raycaster(Camera const& camera, Scene const& scene)

@@ -1,5 +1,5 @@
-# ifndef BUW_IMAGE_HPP
-# define BUW_IMAGE_HPP
+#ifndef BUW_IMAGE_HPP
+#define BUW_IMAGE_HPP
 
 #include <glm/vec3.hpp>
 #include "color.hpp"
@@ -16,10 +16,12 @@ public:
     Image();
     Image(std::vector<Pixel> pixels, glm::ivec2 resolution);
     void setPixel(Pixel pixel);
-    std::vector pixels();
+   // std::vector pixels();
     glm::ivec2 resolution();
 
 private:
     std::vector<Pixel> pixels_;
     glm::ivec2 resolution_;
 };
+
+#endif

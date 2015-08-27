@@ -3,33 +3,22 @@
 
 #include "Triangle.hpp"
 
-class Face {
-		public:
-			Face() : t1_(), t2_() {}
- 			Face(Triangle const& a, Triangle const& b) : t1_(a), t2_(b) {}
+class Face : public Shape 
+{
+public:
+			Face();
+ 			Face(Triangle const& a, Triangle const& b);
+ 			Face(std::string const& name, std::shared_ptr<Material> const& material,
+ 						Triangle const& a, Triangle const& b);
+ 			
+ 			
+ 			Intersection intersect(Ray const& ray) const;
 
- 			Intersection intersect(Ray const& ray) const {
- 				auto isec1 = t1_.intersect(ray);
- 				auto isec2 = t2_.intersect(ray);
+private:
+			Triangle t1_;
+ 			Triangle t2_;
+ 			std::string name_;
+ 			std::shared_ptr<Material> material_;
 
- 				if (isec1.hit && isec2.hit) {
- 					if (isec1.t < isec2.t) {
- 						return isec1;
- 					} else {
- 						return isec2;
- 					}
- 				} else if (isec1.hit) {
- 					return isec1;
- 				} else if (isec2.hit) {
- 					return isec2;
- 				}
-
- 				return Intersection();
- 			}
-
- 		private:
-			Triangle t1_, t2_;
-			// Color c;
-		};
-
+};
 #endif

@@ -16,11 +16,11 @@ class Sphere : public Shape{
 		virtual  float volume() const override;*/
 
 		glm::vec3 getcenter() const;
-		void setcenter_x(double centerx);
-		void setcenter_y(double centery);
-		void setcenter_z(double centerz);
+		void setcenter_x(double centerx) &;
+		void setcenter_y(double centery) &;
+		void setcenter_z(double centerz) &;
 		float getradius() const;
-		void setradius(double radius);
+		void setradius(double radius) &;
 
 		Intersection intersect(Ray const& ray) const override;
 

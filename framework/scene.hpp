@@ -10,7 +10,7 @@
 #include "Material.hpp"
 
 
-typedef std::vector<std::shared_ptr<Material>> MaterialContainer;
+// typedef std::vector<std::shared_ptr<Material>> MaterialContainer;
 
 class Scene
 {
@@ -24,13 +24,14 @@ class Scene
     get_comp(); */
     	/* : lights{}
 	, composite{} */
-    MaterialContainer& get_materials();
+    void add_mat(std::shared_ptr<Material> const& mat);
+    std::vector<std::shared_ptr<Material>> const& get_materials();
  private:
-    Color amb_light;
-    std::vector<Light> lights;
-    Camera cam;
-    Composite comp;
-    MaterialContainer materials;
+    Color amb_light_;
+    std::vector<Light> lights_;
+    Camera cam_;
+    Composite comp_;
+    std::vector<std::shared_ptr<Material>> materials_;
 
 	/*
 	std::vector<Light> lights;

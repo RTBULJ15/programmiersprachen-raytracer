@@ -54,7 +54,7 @@ SDFLoader::SDFLoader (std::string const& sdfpath)
                         {
                             std::cout << "is material:" << token_str << std::endl;
                             // Instanciate a new Material Class Object
-				auto mat = std::make_shared<Material>();
+				                  auto mat = std::make_shared<Material>();
                                 // expect std::string
                             if (!(iss >> token_str)) {
                                 throw std::exception();
@@ -145,8 +145,8 @@ SDFLoader::SDFLoader (std::string const& sdfpath)
 
                             mat->specular_exp = token_double;
 
-                            (scene_.get_materials()).push_back(mat);
-                            std::cout << "materialslength: " << (scene_.get_materials()).size() << std::endl;
+                            scene_.add_mat(mat);
+                            // std::cout << "materialslength: " << (scene_.get_materials()).size() << std::endl;
                         }
                         else if (token_str == "shape")
                         {
@@ -480,6 +480,9 @@ SDFLoader::SDFLoader (std::string const& sdfpath)
 
 }
 
+Scene const& SDFLoader::get_scene(){
+  return scene_;
+}
 //jedes shape auf hits prüfen, loop über size von shape container
 //hit intersection vector
 //vector sortienen , kürzest entfernte punkte finden

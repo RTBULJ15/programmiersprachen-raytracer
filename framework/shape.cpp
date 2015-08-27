@@ -5,14 +5,16 @@
 	Shape::Shape ()
 	: name_{"default"}, material_{}
 	{}
-
+	Shape::Shape (std::string const& name) 
+	: name_{name}, material_{}
+	{}
 	Shape::Shape (std::string const& name, std::shared_ptr<Material> const& material)
 	: name_(name), material_(material)
 	{}
 
 	Shape::~Shape()
     	{
-        std::cout << "~Shape destructor called" << std::endl;
+        std::cout << "~Shape destructor called "<< name_ << std::endl;
     	}
 
 	std::string const& Shape::getName() const{return name_;}

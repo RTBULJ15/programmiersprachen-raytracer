@@ -18,17 +18,17 @@ glm::vec3 Sphere::getcenter() const{
   return center_;
 }
 
-void Sphere::setcenter_x(double centerx)
+void Sphere::setcenter_x(double centerx)&
 {
     center_.x = centerx;
 }
 
-void Sphere::setcenter_y(double centery)
+void Sphere::setcenter_y(double centery)&
 {
     center_.y = centery;
 }
 
-void Sphere::setcenter_z(double centerz)
+void Sphere::setcenter_z(double centerz)&
 {
     center_.z = centerz;
 }
@@ -37,7 +37,7 @@ float Sphere::getradius() const{
   return radius_;
 }
 
-void Sphere::setradius(double radius)
+void Sphere::setradius(double radius)&
 {
     radius_ = radius;
 }
@@ -64,12 +64,22 @@ void Sphere::print(std::ostream& os) const{
 
 Intersection Sphere::intersect(Ray const& ray) const {
 	//Schnittpunkt berechnen
-	glm::vec3 L= Sphere::kreisNormale(ray.origin, center_);
-	float tc= glm::dot(L, ray.direction);
-	float d = sqrt(glm::length((tc*tc) - (L*L)));
-	float t1c = sqrt((radius_ * radius_) - (d*d));
-	float t1 = tc - t1c;
+	glm::vec3 L= center_-ray.origin;
+	
+	glm::vec3 tc= L*(float(cos((glm::dot(L, ray.direction)*3.14159/180)))); // degree into radiant
+	//float L_length = glm::distance(glm::vec3{0,0,0},L);
+	glm::vec3 d_temp = (L*L) - (tc*tc);
+	glm::vec3 d(sqrtf(d_temp[0]),sqrtf(d_temp[1]),sqrtf(d_temp[2]));
+
+	glm::vec3 t1c_temp = (radius_ * radius_) - (d*d);
+	glm::vec3 t1c(sqrtf(t1c_temp[0]),sqrtf(t1c_temp[1]),sqrtf(t1c_temp[2]));
+	glm::vec3 t1 = tc - t1c;
+
 	glm::vec3 P1 = (ray.origin + ray.direction) * t1; //<--Schnittpunkt
+	glm::vec3 normale = Sphere::kreisNormale(center_, P1); //Spherenormale am Schnittpunkt 
+
+
+
 
 	Intersection intersect;
 	intersect.hit = glm::intersectRaySphere(
@@ -77,7 +87,8 @@ Intersection Sphere::intersect(Ray const& ray) const {
 		center_, radius_, 						// sphere parameters
 		intersect.position, intersect.normal 	// return per reference
 	);
-	intersect.position = P1;
+	// intersect.position = P1;
+	// intersect.normal = normale;
 
 	return intersect;
 }

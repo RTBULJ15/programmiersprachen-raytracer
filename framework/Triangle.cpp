@@ -1,9 +1,11 @@
 #include "Triangle.hpp"
 
-Triangle::Triangle() : Shape(), v1_(), v2_(), v3_(), n_() {}
+Triangle::Triangle() :  Shape{}, name_{}, material_(nullptr), v1_(), v2_(), v3_(), n_() {}
 
 Triangle::Triangle(glm::vec3 const& u, glm::vec3 const& v, glm::vec3 const& w)
-: Shape()
+: Shape{"bla"}
+, name_{}
+, material_(nullptr)
 , v1_(u)
 , v2_(v)
 , v3_(w)
@@ -26,8 +28,7 @@ Triangle::v3 () const {
 }
 
 
-Intersection 
-Triangle::intersect (Ray const& ray) const 
+Intersection Triangle::intersect (Ray const& ray) const 
 {
 	glm::vec3 bary;
 	Intersection isec;

@@ -5,18 +5,20 @@
 #include <vector>
 
 Scene::Scene()
-// : amb_light(){0,0,0}, light() {}, cam(){}, comp(){}
-{
-
-}
+: amb_light_(), lights_(), cam_(), comp_(), materials_(){}
 
 
 //Scene::Scene(Color amb_light, std::vector<Light> lights, Camera cam , Composite comp)
 //{
 //}
 
-MaterialContainer& Scene::get_materials()
+void Scene::add_mat(std::shared_ptr<Material> const& mat)
 {
-    return materials;
+    materials_.push_back(mat);
 
+}
+
+std::vector<std::shared_ptr<Material>> const& Scene::get_materials()
+{
+	return materials_;
 }

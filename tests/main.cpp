@@ -4,6 +4,8 @@
 #include "Box.hpp"
 #include <glm/gtx/intersect.hpp>
 #include "sdf_loader.hpp"
+#include "intersection.hpp"
+#include "light.hpp"
 
 template <typename T>
 void print_vector (T v) {
@@ -97,30 +99,57 @@ TEST_CASE("Box_inter", "[intersect]")
 	Ray charles{{0.0,0.0,0.0},{3.0,3.0,3.0}};
 	REQUIRE (box1.intersect(charles).hit);
 } */
+// TEST_CASE("Sphere_normale", "[load]")
+// {
+// 	std::shared_ptr<Material> black = std::make_shared<Material>();
 
+// 	Sphere kugel{glm::vec3{0.0f,0.0f,10.0f},2.0f, "default", black};
+
+// 	Box box{glm::vec3{0.0,0.0,3.0}, glm::vec3{3.0,0.0,4.0}, "testbox", black};
+
+// 	Ray strahl{{0.0,0.0,0.0},{.0,0.11,1.0}};
+
+// 	Light sonne("bla" ,{25.0,15.0,1.9}, {0.0,10.1,10.0}, {10.0,10.1,10.0});
+
+// 	Intersection isec = box.intersect(strahl);
+
+// 	glm::vec3 sunPos = sonne.getPos();
+    
+ //    glm::vec3 Lichtstrahl = sunPos - isec.position ;
+
+ //      glm::normalize(Lichtstrahl);
+ //      float phong = std::cos(glm::dot( isec.normal, Lichtstrahl));
+
+	// std::cout<< phong <<" " << isec.normal[0] <<" "<< isec.normal[1] <<" "<< isec.normal[2] <<" " << std::endl;
+
+
+// }
 TEST_CASE("sdf loader", "[load]")
 {
-	SDFLoader loader("/opt/raytracer/2/programmiersprachen-raytracer/tests/scene.sdf");
+	SDFLoader loader("/home/jo/raytracer2/programmiersprachen-raytracer/tests/scene.sdf");
+	Scene test = loader.get_scene();
+	auto vecmat = test.get_materials();
 
-	/*for (auto mat: loader.materials()) {
-		std::cout << mat;
-	}*/
+	std::cout << *vecmat[0] << std::endl;
+	// for (auto mat: scene.get_materials_()) {
+	// 	std::cout << mat;
+	// };
 }
 
 
 
 int main(int argc, char *argv[])
 {
-  /*Material* mat = new Material();
-  Sphere kugel{glm::vec3{0.0f,0.0f,0.0f},1.0f, "Koogle", mat};
-  Box box{glm::vec3{0.0f,0.0f,0.0f},glm::vec3{0.0f,0.0f,0.0f}, "Box_1", mat};
-  std::cout << kugel << std::endl << box << std::endl;
+  // Material* mat = new Material();
+  // Sphere kugel{glm::vec3{0.0f,0.0f,0.0f},1.0f, "Koogle", mat};
+  // Box box{glm::vec3{0.0f,0.0f,0.0f},glm::vec3{0.0f,0.0f,0.0f}, "Box_1", mat};
+  // std::cout << kugel << std::endl << box << std::endl;
 
-	SDFLoader loader("/opt/raytracer/2/programmiersprachen-raytracer/source/tests/scene.sdf");
-    /*SDFLoader loader("materials.sdf");
-	for (auto mat: loader.materials()) {
-		std::cout << mat
-	 */
+	// SDFLoader loader("/opt/raytracer/2/programmiersprachen-raytracer/source/tests/scene.sdf");
+ //    SDFLoader loader("materials.sdf");
+	// for (auto mat: loader.materials()) {
+	// 	std::cout << mat
+	 
 
   return Catch::Session().run(argc, argv);
 }

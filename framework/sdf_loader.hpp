@@ -16,6 +16,7 @@ class SDFLoader {
 public:
 	SDFLoader(std::string const& sdfpath);
 	//Scene scene () const;
+	Scene const& get_scene();
 private:
     Scene scene_;
 

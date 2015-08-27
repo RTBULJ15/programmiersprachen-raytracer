@@ -19,11 +19,13 @@ class Triangle : public Shape
 			glm::vec3 v2 () const;
 			glm::vec3 v3 () const;
 
-			Intersection intersect (Ray const& ray) const;
+			Intersection intersect (Ray const& ray) const override;
 			glm::vec3 barycentric_to_world (glm::vec3 const& bary) const;
 
 		private:
 			glm::vec3 v1_, v2_, v3_, n_;
+			std::string name_;
+			std::shared_ptr<Material> material_;
 };
 
 #endif
