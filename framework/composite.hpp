@@ -1,22 +1,21 @@
 # ifndef BUW_COMPOSITE_HPP
 # define BUW_COMPOSITE_HPP
 
-
-//#include "Shape.hpp"
-//#include "Box.hpp"
-//#include "Sphere.hpp"
+#include "Shape.hpp"
 #include <glm/vec3.hpp>
-#include "color.hpp"
-//#include "Ray.hpp"
-#include "intersection.hpp"
 
-class Composite/* : public Shape*/{
-//	public: Composite();
-            //void add_shape (Shape x);
-            //Intersection intersect(Ray const& ray) const override;
-//            ~Composite();
+class Composite : public Shape{
+	public: 
+		Composite();
 
-    private: //std::vector<Shape> shapes_;
+        void add_child(std::shared_ptr<Shape> const& child);
+        Intersection intersect(Ray const& ray) const override;
+        
+        ~Composite();
+
+    private: 
+    	std::vector<std::shared_ptr<Shape>> child_vec_;
 
 };
- #endif
+
+#endif

@@ -29,7 +29,7 @@ int main(int argc, char* argv[])
 
 
 	glm::vec3 eye{0, 0, 0};
-	float focal_length = 2.0;
+	float focal_length = 1.0;
 
 	float t = 0;
 

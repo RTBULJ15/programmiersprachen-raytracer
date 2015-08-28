@@ -6,6 +6,7 @@
 #include "sdf_loader.hpp"
 #include "intersection.hpp"
 #include "light.hpp"
+#include "scene.hpp"
 
 template <typename T>
 void print_vector (T v) {
@@ -126,11 +127,11 @@ TEST_CASE("Box_inter", "[intersect]")
 // }
 TEST_CASE("sdf loader", "[load]")
 {
-	SDFLoader loader("/home/jo/raytracer2/programmiersprachen-raytracer/tests/scene.sdf");
-	Scene test = loader.get_scene();
-	auto vecmat = test.get_materials();
+	// SDFLoader loader("/home/jo/raytracer2/programmiersprachen-raytracer/tests/scene.sdf");
+	// Scene test = loader.get_scene();
+	// auto vecmat = test.get_materials();
 
-	std::cout << *vecmat[0] << std::endl;
+	// std::cout << *vecmat[0] << std::endl;
 	// for (auto mat: scene.get_materials_()) {
 	// 	std::cout << mat;
 	// };

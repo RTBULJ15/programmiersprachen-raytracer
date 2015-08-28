@@ -1,8 +1,5 @@
-#define _USE_MATH_DEFINES
-#include <cmath>
 #include "scene.hpp"
-#include <iostream>
-#include <vector>
+
 
 Scene::Scene()
 : amb_light_(), lights_(), cam_(), comp_(), materials_(){}

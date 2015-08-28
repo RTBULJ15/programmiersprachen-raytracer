@@ -19,6 +19,8 @@ public:
 private:
     std::string name_;
     double horizontal_apex_angle_;
+    // float focal_lenght;
+    
     //glm::ivec2 resolution;
 };
 
