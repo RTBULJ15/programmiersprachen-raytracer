@@ -1,7 +1,7 @@
 #include "composite.hpp"
 
 Composite::Composite() : 
-  Shape(), child_vec(){}
+  Shape(), child_vec_(){}
 
 
  void Composite::add_child(std::shared_ptr<Shape> const& child){
@@ -18,7 +18,7 @@ Intersection Composite::intersect(Ray const& r) const{
   
   Intersection i;
   for (auto const& child: child_vec_) {
-    auto current_i = child->intersect_with(ray);
+    auto current_i = child->intersect(r);
 	if (current_i.hit && current_i.t > 0 && current_i.t < min_t) {
 		i = current_i;
 		min_t = current_i.t;

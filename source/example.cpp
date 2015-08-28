@@ -9,6 +9,7 @@
 #include "intersection.hpp"
 #include "Sphere.hpp"
 #include "light.hpp"
+#include "composite.hpp"
 
 int main(int argc, char* argv[])
 {
@@ -19,7 +20,11 @@ int main(int argc, char* argv[])
     Sphere test_kreis(glm::vec3{0.0,0.0,4.0}, 1.0,"testkreis", black);
   // Triangle test_triangle({1,0,5},{-1,0,5},{0,1,5});
     Light sonne("bla" ,{2.0,1.0,1.9}, {0.0,10.1,10.0}, {10.0,10.1,10.0});
-
+    Composite comp;
+    
+auto r = std::make_shared<Box>(glm::vec3{-1.5,-1.0,5.0} + offset, glm::vec3{0.9,1.0,6.0} + offset,"testbox", black);
+  std::shared_ptr<Shape> s = r;
+  comp.add_child(s);
   int win_size_x=400;
   int win_size_y=400;
   float xpos_pro=1/float(win_size_x);
