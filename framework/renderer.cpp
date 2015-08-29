@@ -3,7 +3,7 @@
 // License    : MIT (see the file LICENSE)
 // Maintainer : Andreas-C. Bernstein <andreas.bernstein@uni-weimar.de>
 // Stability  : experimental
-//
+// 2.Edit     : Leah-M. Walterscheid & Jonathan-D. Wedler
 // Renderer
 // -----------------------------------------------------------------------------
 

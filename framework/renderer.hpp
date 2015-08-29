@@ -3,7 +3,7 @@
 // License    : MIT (see the file LICENSE)
 // Maintainer : Andreas-C. Bernstein <andreas.bernstein@uni-weimar.de>
 // Stability  : experimental
-//
+// 2.Edit     : Leah-M. Walterscheid & Jonathan-D. Wedler
 // Renderer
 // -----------------------------------------------------------------------------
 
@@ -12,9 +12,12 @@
 
 #include "color.hpp"
 #include "pixel.hpp"
-#include "ppmwriter.hpp"
 #include <string>
 #include <glm/glm.hpp>
+#include <iostream>
+#include "intersection.hpp"
+#include "Ray.hpp"
+#include "scene.hpp"
 
 class Renderer
 {

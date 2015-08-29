@@ -8,6 +8,8 @@ Composite::Composite() :
    child_vec_.push_back(child);
  }
 
+std::vector<std::shared_ptr<Shape>> const& Composite::get_child_vec(){
+return child_vec_;}
 
 Intersection Composite::intersect(Ray const& r) const{
 	
