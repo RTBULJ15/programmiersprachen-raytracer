@@ -24,9 +24,12 @@
  				auto isec2 = t2_.intersect(ray);
 
  				if (isec1.hit && isec2.hit) {
+ 					auto n = (isec1.normal + isec2.normal) / 2.0;
  					if (isec1.t < isec2.t) {
+ 						isec1.normal = n;
  						return isec1;
  					} else {
+ 						isec2.normal = n;
  						return isec2;
  					}
  				} else if (isec1.hit) {

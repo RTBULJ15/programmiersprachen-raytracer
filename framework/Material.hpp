@@ -8,9 +8,9 @@ struct Material
 {	
 	Material()
 	 : name()
-	 , ka()
-	 , kd()
-	 , ks()
+	 , ka() 
+	 , kd() 
+	 , ks() 
 	 , specular_exp(1.0)
     {}
 

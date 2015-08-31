@@ -3,7 +3,7 @@
 
 // #include <array>
 // #include "Shape.hpp"
-// #include <glm/vec3.hpp>
+// #include <glm/dvec3.hpp>
 // #include <glm/gtx/intersect.hpp>
 // #include "color.hpp"
 // #include "Box.hpp"
@@ -18,17 +18,17 @@
 // 	public:
 //         Box();
 
-//         Box(glm::vec3 const& p1, glm::vec3 const& p2, std::string name, std::shared_ptr<Material> const& material);
+//         Box(glm::dvec3 const& p1, glm::dvec3 const& p2, std::string name, std::shared_ptr<Material> const& material);
 		
-// 		//Box(glm::vec3 const& min, glm::vec3 const& max, std::string name, Material* const& material);
+// 		//Box(glm::dvec3 const& min, glm::dvec3 const& max, std::string name, Material* const& material);
 
-// 		glm::vec3 getMin() const;
-// 		void setMin(glm::vec3 const& min);
+// 		glm::dvec3 getMin() const;
+// 		void setMin(glm::dvec3 const& min);
 // 		void setMinx(double const& minx);
 // 		void setMiny(double const& miny);
 // 		void setMinz(double const& minz);
-// 		glm::vec3 getMax() const;
-// 		void setMax(glm::vec3 const& max);
+// 		glm::dvec3 getMax() const;
+// 		void setMax(glm::dvec3 const& max);
 // 		void setMaxx(double const& maxx);
 // 		void setMaxy(double const& maxy);
 // 		void setMaxz(double const& maxz);
@@ -39,8 +39,8 @@
 // 		~Box();
 
 // 	private:
-// 		glm::vec3 min_;
-// 		glm::vec3 max_;
+// 		glm::dvec3 min_;
+// 		glm::dvec3 max_;
 //        	std::string name_;
 //         std::shared_ptr<Material> material_;
 // 		std::array<Face, 6> faces_;
@@ -69,28 +69,32 @@ class Box : public Shape{
 		public:
 			Triangle() : v1_(), v2_(), v3_(), n_() {}
 
-			Triangle(glm::vec3 const& u, glm::vec3 const& v, glm::vec3 const& w)
+			Triangle(glm::dvec3 const& u, glm::dvec3 const& v, glm::dvec3 const& w)
 			 : v1_(u)
 			 , v2_(v)
 			 , v3_(w)
-			 , n_(glm::normalize(glm::cross(v3_ - v1_, v2_ - v1_))) 
+			 , n_(-glm::normalize(glm::cross(v3_ - v1_, v2_ - v1_))) 
 			{}
 
-			glm::vec3 v1 () const {
+			glm::dvec3 v1 () const {
 				return v1_;
 			}
 
-			glm::vec3 v2 () const {
+			glm::dvec3 v2 () const {
 				return v2_;
 			}
 
-			glm::vec3 v3 () const {
+			glm::dvec3 v3 () const {
 				return v3_;
+			}
+
+			glm::dvec3 n() const {
+				return n_;
 			}
 
 
 			Intersection intersect (Ray const& ray) const {
-				glm::vec3 bary;
+				glm::dvec3 bary;
 				Intersection isec;
 
 				isec.hit = glm::intersectRayTriangle (
@@ -102,29 +106,25 @@ class Box : public Shape{
 				if (isec.hit) {
 					isec.normal = n_;
 					isec.position = barycentric_to_world(bary);
-					isec.t = glm::length(isec.position - ray.origin);
+					isec.t = bary.z;
 				}
 
 				return isec;
 			}
 
-			glm::vec3 barycentric_to_world (glm::vec3 const& bary) const {
-				glm::vec3 result;
+			glm::dvec3 barycentric_to_world (glm::dvec3 const& bary) const {
+				glm::dvec3 result;
 		        double u, v, w;
 
-		        u = bary.x;
-		        v = bary.y;
-		        w = 1 - (u+v);
+		        u = 1 - (bary.x + bary.y);
+		        v = bary.x;
+		        w = bary.y;
 
-		        result.x = (u * v1_.x + v * v2_.x + w * v3_.x);
-		        result.y = (u * v1_.y + v * v2_.y + w * v3_.y);
-		        result.z = (u * v1_.z + v * v2_.z + w * v3_.z);
-
-		        return result;
+		        return u * v1_ + v * v2_ + w * v3_;
 			}
 
 		private:
-			glm::vec3 v1_, v2_, v3_, n_;
+			glm::dvec3 v1_, v2_, v3_, n_;
 		};
 
 		class Face {
@@ -159,19 +159,19 @@ class Box : public Shape{
 
 	public:
 		Box();
-		Box(glm::vec3 const& min, glm::vec3 const& max, std::string name, std::shared_ptr<Material> const& material);
+		Box(glm::dvec3 const& min, glm::dvec3 const& max, std::string name, std::shared_ptr<Material> const& material);
 
 		// /* virtual */ float area() const override;
 		// /* virtual */ float volume() const override;
 		
-		glm::vec3 getMin() const;
-		glm::vec3 getMax() const;
+		glm::dvec3 getMin() const;
+		glm::dvec3 getMax() const;
 
-		void setMin(glm::vec3 const& max);
+		void setMin(glm::dvec3 const& max);
 		void setMinx(double const& maxx);
 		void setMiny(double const& maxy);
 		void setMinz(double const& maxz);
- 		void setMax(glm::vec3 const& max);
+ 		void setMax(glm::dvec3 const& max);
 		void setMaxx(double const& maxx);
 		void setMaxy(double const& maxy);
 		void setMaxz(double const& maxz);
@@ -183,8 +183,8 @@ class Box : public Shape{
 		~Box();
 
 	private:
-		glm::vec3 min_;
-		glm::vec3 max_;
+		glm::dvec3 min_;
+		glm::dvec3 max_;
 
 		std::array<Face, 6> faces_;
 

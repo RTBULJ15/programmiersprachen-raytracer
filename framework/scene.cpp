@@ -19,3 +19,11 @@ std::vector<std::shared_ptr<Material>> const& Scene::get_materials()
 {
 	return materials_;
 }
+
+void Scene::add_light(std::shared_ptr<Light> const& light){
+	lights_.push_back(light);
+}
+
+std::vector<std::shared_ptr<Light>> const& Scene::get_lights(){
+	return lights_;
+}

@@ -9,7 +9,7 @@ struct Intersection
 {
 	Intersection () : hit(false), t(-1), position(), normal() {}
 
-	Intersection (bool h, double ray_t, glm::vec3 const& p, glm::vec3 const& n)
+	Intersection (bool h, double ray_t, glm::dvec3 const& p, glm::dvec3 const& n)
 	 : hit(h && ray_t >= 0)
 	 , position(p)
 	 , normal(n)
@@ -18,11 +18,11 @@ struct Intersection
 
 	bool hit;
 
-	glm::vec3 position;
+	glm::dvec3 position;
 
 	double t;
 
-	glm::vec3 normal;
+	glm::dvec3 normal;
 
 };
 

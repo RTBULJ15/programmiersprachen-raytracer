@@ -1,7 +1,7 @@
 # ifndef BUW_LIGHT_HPP
 # define BUW_LIGHT_HPP
 
-# include "glm/vec3.hpp"
+# include "glm/glm.hpp"
 # include <string>
 
 
@@ -9,20 +9,21 @@ class Light
 {
 public:
     Light();
-    Light(std::string const& name, glm::vec3 const& position, glm::vec3 const& ka , glm::vec3 const& kd);
-    glm::vec3 getPos() const;
-    //void setName(std::string name)  &;
-    //void setPosition_x(double const& posx) &;
-    //void setPosition_y(double const& posy) &;
-    //void setPosition_z(double const& posz) &;
+    Light(std::string const& name, glm::dvec3 const& position, glm::dvec3 const& ka , glm::dvec3 const& kd);
+    glm::dvec3 getPos() const;
+    void setName(std::string name)  &;
+    void setPosition_x(double const& posx) &;
+    void setPosition_y(double const& posy) &;
+    void setPosition_z(double const& posz) &;
+    float getPos_x() const;
 
 
 private:
-    glm::vec3 position_;
+    glm::dvec3 position_;
     std::string name_;
 
-    glm::vec3 ka_;
-    glm::vec3 kd_;
+    glm::dvec3 ka_;
+    glm::dvec3 kd_;
 };
 
 #endif

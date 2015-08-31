@@ -9,20 +9,20 @@
 //   {}
 
 
-// Box::Box(glm::vec3 const& p1, glm::vec3 const& p2, std::string name, std::shared_ptr<Material> const& material)
+// Box::Box(glm::dvec3 const& p1, glm::dvec3 const& p2, std::string name, std::shared_ptr<Material> const& material)
 //   : Shape(name, material)
 //   , min_(std::min(p1.x, p2.x), std::min(p1.y, p2.y), std::min(p1.z, p2.z))
 //   , max_(std::max(p1.x, p2.x), std::max(p1.y, p2.y), std::max(p1.z, p2.z))
 //   , faces_()
 // {
-// 	glm::vec3 ldf (min_.x, min_.y, min_.z);
-// 	glm::vec3 ldb (min_.x, min_.y, max_.z);
-// 	glm::vec3 luf (min_.x, max_.y, min_.z);
-// 	glm::vec3 lub (min_.x, max_.y,max_.z);
-// 	glm::vec3 rdf (max_.x, min_.y, min_.z);
-// 	glm::vec3 rdb (max_.x, min_.y, max_.z);
-// 	glm::vec3 ruf (max_.x, max_.y, min_.z);
-// 	glm::vec3 rub (max_.x, max_.y,max_.z);
+// 	glm::dvec3 ldf (min_.x, min_.y, min_.z);
+// 	glm::dvec3 ldb (min_.x, min_.y, max_.z);
+// 	glm::dvec3 luf (min_.x, max_.y, min_.z);
+// 	glm::dvec3 lub (min_.x, max_.y,max_.z);
+// 	glm::dvec3 rdf (max_.x, min_.y, min_.z);
+// 	glm::dvec3 rdb (max_.x, min_.y, max_.z);
+// 	glm::dvec3 ruf (max_.x, max_.y, min_.z);
+// 	glm::dvec3 rub (max_.x, max_.y,max_.z);
 
 // 	// front face
 // 	Triangle front_t1(rdf, ldf, ruf);
@@ -64,10 +64,10 @@
 
 
 
-// glm::vec3 Box::getMin() const{
+// glm::dvec3 Box::getMin() const{
 // 	return min_;
 // }
-// void Box::setMin(glm::vec3 const& min)
+// void Box::setMin(glm::dvec3 const& min)
 // {
 //     min_ = min;
 // }
@@ -83,10 +83,10 @@
 // {
 //     min_.z = minz;
 // }
-// glm::vec3 Box::getMax() const{
+// glm::dvec3 Box::getMax() const{
 // 	return max_;
 // }
-// void Box::setMax(glm::vec3 const& max)
+// void Box::setMax(glm::dvec3 const& max)
 // {
 //     max_ = max;
 // }
@@ -130,6 +130,7 @@
 #include "Box.hpp"
 #include "color.hpp"
 #include <glm/gtx/intersect.hpp>
+#include <algorithm>
 
 // TODO: anpassen
 Box::Box()
@@ -137,20 +138,20 @@ Box::Box()
 {}
 
 
-Box::Box(glm::vec3 const& p1, glm::vec3 const& p2, std::string name, std::shared_ptr<Material> const& material)
+Box::Box(glm::dvec3 const& p1, glm::dvec3 const& p2, std::string name, std::shared_ptr<Material> const& material)
   : Shape(name, material)
   , min_(std::min(p1.x, p2.x), std::min(p1.y, p2.y), std::min(p1.z, p2.z))
   , max_(std::max(p1.x, p2.x), std::max(p1.y, p2.y), std::max(p1.z, p2.z))
   , faces_()
 {
-	glm::vec3 ldf (min_.x, min_.y, min_.z);
-	glm::vec3 ldb (min_.x, min_.y, max_.z);
-	glm::vec3 luf (min_.x, max_.y, min_.z);
-	glm::vec3 lub (min_.x, max_.y,max_.z);
-	glm::vec3 rdf (max_.x, min_.y, min_.z);
-	glm::vec3 rdb (max_.x, min_.y, max_.z);
-	glm::vec3 ruf (max_.x, max_.y, min_.z);
-	glm::vec3 rub (max_.x, max_.y,max_.z);
+	glm::dvec3 ldf (min_.x, min_.y, min_.z);
+	glm::dvec3 ldb (min_.x, min_.y, max_.z);
+	glm::dvec3 luf (min_.x, max_.y, min_.z);
+	glm::dvec3 lub (min_.x, max_.y,max_.z);
+	glm::dvec3 rdf (max_.x, min_.y, min_.z);
+	glm::dvec3 rdb (max_.x, min_.y, max_.z);
+	glm::dvec3 ruf (max_.x, max_.y, min_.z);
+	glm::dvec3 rub (max_.x, max_.y,max_.z);
 
 	// front face
 	Triangle front_t1(rdf, ldf, ruf);
@@ -190,7 +191,7 @@ Box::Box(glm::vec3 const& p1, glm::vec3 const& p2, std::string name, std::shared
 	faces_[5] = down;
 }
 
-void Box::setMin(glm::vec3 const& min)
+void Box::setMin(glm::dvec3 const& min)
 {
     min_ = min;
 }
@@ -207,7 +208,7 @@ void Box::setMinz(double const& minz)
     min_.z = minz;
 }
 
-void Box::setMax(glm::vec3 const& max)
+void Box::setMax(glm::dvec3 const& max)
 {
     max_ = max;
 }
@@ -224,10 +225,10 @@ void Box::setMaxz(double const& maxz)
     max_.z = maxz;
 }
 
-glm::vec3 Box::getMin() const{
+glm::dvec3 Box::getMin() const{
 	return min_;
 }
-glm::vec3 Box::getMax() const{
+glm::dvec3 Box::getMax() const{
 	return max_;
 }
 
@@ -239,13 +240,29 @@ void Box::print(std::ostream& os) const{
 
 Intersection Box::intersect(Ray const& ray) const{
 	Intersection isec;
+
 	for (auto f: faces_) {
-		auto cur_isec = f.intersect(ray);
-		if (cur_isec.hit && ((isec.hit && cur_isec.t < isec.t) || !isec.hit)) {
-			isec = cur_isec;
+		auto cisec = f.intersect(ray);
+		if (cisec.hit) {
+			if (!isec.hit || isec.t > cisec.t) {
+				isec = cisec;
+			}
 		}
 	}
+
 	return isec;
+
+	/*for (auto f: faces_) {
+		auto cur_isec = f.intersect(ray);
+
+		if (cur_isec.hit) {
+			if (isec.hit && cur_isec.t < isec.t) {
+				isec = cur_isec;
+			} else if (!isec.hit) {
+				isec = cur_isec;
+			}
+		}
+	}*/
 }
 Box::~Box()
 {

@@ -26,9 +26,13 @@ class Scene
 	, composite{} */
     void add_mat(std::shared_ptr<Material> const& mat);
     std::vector<std::shared_ptr<Material>> const& get_materials();
+
+    void add_light(std::shared_ptr<Light> const& light);
+    std::vector<std::shared_ptr<Light>> const& get_lights();
+
  private:
     Color amb_light_;
-    std::vector<Light> lights_;
+    std::vector<std::shared_ptr<Light>> lights_;
     Camera cam_;
     Composite comp_;
     std::vector<std::shared_ptr<Material>> materials_;

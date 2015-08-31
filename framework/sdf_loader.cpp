@@ -196,7 +196,7 @@ SDFLoader::SDFLoader (std::string const& sdfpath)
                                    throw std::exception();
                                }
                                box->setMinz(token_double);
-                               //glm::vec3 boxmin (boxminx, boxminy, token_double);
+                               //glm::dvec3 boxmin (boxminx, boxminy, token_double);
 
                                if (!(iss >> token_double))
                                {
@@ -217,7 +217,7 @@ SDFLoader::SDFLoader (std::string const& sdfpath)
                                    throw std::exception();
                                }
                                box->setMaxz(token_double);
-                               //glm::vec3 boxmax (boxmaxx, boxmaxy, token_double);
+                               //glm::dvec3 boxmax (boxmaxx, boxmaxy, token_double);
 
                                if (!(iss >> token_str))
                                {
@@ -325,7 +325,8 @@ SDFLoader::SDFLoader (std::string const& sdfpath)
                         }
                         else if (token_str == "light")
                                     // Behandle die einzelnen Typen getrennt nach Typ
-                        {
+                        {   
+
                             std::cout << "is light: " << token_str << std::endl;
                             //Light* light = new Light;
                             if (!(iss >> token_str))
@@ -351,7 +352,7 @@ SDFLoader::SDFLoader (std::string const& sdfpath)
                                 throw std::exception();
                             }
                             double position_z = token_double;
-                            glm::vec3 position(position_x, position_y, position_z);
+                            glm::dvec3 position(position_x, position_y, position_z);
 
                             if (!(iss >> token_double))
                             {
@@ -359,47 +360,49 @@ SDFLoader::SDFLoader (std::string const& sdfpath)
                             }
                             // ambientes licht wird anscheinenfd woanders  (scene) abgespeichert
 
-                            float ka_x = token_double;
+                            double ka_x = token_double;
 
                             if (!(iss >> token_double))
                             {
                                 throw std::exception();
                             }
 
-                            float ka_y = token_double;
+                            double ka_y = token_double;
 
                             if (!(iss >> token_double))
                             {
                                 throw std::exception();
                             }
 
-                            float ka_z = token_double;
-                            glm::vec3 ka(ka_x, ka_y, ka_z);
+                            double ka_z = token_double;
+                            glm::dvec3 ka(ka_x, ka_y, ka_z);
 
                             if (!(iss >> token_double))
                             {
                                 throw std::exception();
                             }
 
-                            float kd_x = token_double;
+                            double kd_x = token_double;
 
                             if (!(iss >> token_double))
                             {
                                 throw std::exception();
                             }
 
-                            float kd_y = token_double;
+                            double kd_y = token_double;
 
                             if (!(iss >> token_double))
                             {
                                 throw std::exception();
                             }
 
-                            float kd_z = token_double;
+                            double kd_z = token_double;
 
-                            glm::vec3 kd(kd_x, kd_y, kd_z);
+                            glm::dvec3 kd(kd_x, kd_y, kd_z);
 
-                            Light light(lightname, position, ka, kd);
+                            auto light = std::make_shared<Light>(lightname, position, ka, kd);
+
+                            scene_.add_light(light);
                         }
 
                         else if (token_str == "camera")

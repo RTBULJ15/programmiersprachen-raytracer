@@ -11,6 +11,10 @@
 #include <memory>
 #include <vector>
 
+#define GLM_SWIZZLE
+#define GLM_FORCE_RADIANS
+#include <glm/gtc/matrix_transform.hpp>
+
 class Shape{
 
 public:
@@ -20,17 +24,15 @@ public:
 
 	virtual Intersection intersect(Ray const& ray) const = 0; //pure virtual
 
-	//virtual float area() const = 0;
-
-	//virtual float volume() const = 0;
-
-
 	std::string const& getName() const;
 	void setName(std::string x);
+	
 	std::shared_ptr<Material> const& getMaterial() const;
 	void setMaterial(std::shared_ptr<Material> mat);
 
-
+	void translate(glm::dvec3 const& t);
+  	void scale(glm::dvec3 const& s);
+  	void rotate(double deg, glm::dvec3 const& axis);
 
 	virtual void print(std::ostream& os) const;
 
@@ -43,8 +45,19 @@ public:
 	virtual ~Shape();
 
 protected:
-	std::string name_;
+	Ray object_ray(Ray const& r) const;
+    glm::dvec3 world_normal(glm::dvec3 const& n) const;
+  	
+  	std::string name_;
 	std::shared_ptr<Material> material_;
+
+	// object to world space and inverse
+  	glm::dmat4 world_transform_;
+  	glm::dmat4 world_transform_inv_;
+
+  	// transposed transformations
+  	glm::dmat3 world_transform_T_;
+  	glm::dmat3 world_transform_inv_T_;
 
 };
 

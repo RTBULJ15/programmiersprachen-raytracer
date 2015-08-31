@@ -2,7 +2,7 @@
 
 Triangle::Triangle() :  Shape{}, name_{}, material_(nullptr), v1_(), v2_(), v3_(), n_() {}
 
-Triangle::Triangle(glm::vec3 const& u, glm::vec3 const& v, glm::vec3 const& w)
+Triangle::Triangle(glm::dvec3 const& u, glm::dvec3 const& v, glm::dvec3 const& w)
 : Shape{"bla"}
 , name_{}
 , material_(nullptr)
@@ -12,17 +12,17 @@ Triangle::Triangle(glm::vec3 const& u, glm::vec3 const& v, glm::vec3 const& w)
 , n_(glm::normalize(glm::cross(v3_ - v1_, v2_ - v1_))) 
 {}
 
-glm::vec3 
+glm::dvec3 
 Triangle::v1 () const {
 	return v1_;
 }
 
-glm::vec3 
+glm::dvec3 
 Triangle::v2 () const {
 	return v2_;
 }
 
-glm::vec3 
+glm::dvec3 
 Triangle::v3 () const {
 	return v3_;
 }
@@ -30,7 +30,7 @@ Triangle::v3 () const {
 
 Intersection Triangle::intersect (Ray const& ray) const 
 {
-	glm::vec3 bary;
+	glm::dvec3 bary;
 	Intersection isec;
 
 	isec.hit = glm::intersectRayTriangle (
@@ -48,10 +48,10 @@ Intersection Triangle::intersect (Ray const& ray) const
 	return isec;
 }
 
-glm::vec3 
-Triangle::barycentric_to_world (glm::vec3 const& bary) const 
+glm::dvec3 
+Triangle::barycentric_to_world (glm::dvec3 const& bary) const 
 {
-	glm::vec3 result;
+	glm::dvec3 result;
 	double u, v, w;
 
 	u = bary.x;
