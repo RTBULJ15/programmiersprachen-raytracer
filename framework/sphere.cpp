@@ -62,7 +62,7 @@ void Sphere::print(std::ostream& os) const{
 	os << "Radius: " << radius_ << " Center: " << center_.x << center_.y << center_.z<<std::endl;
 }
 
-Intersection Sphere::intersect(Ray const& ray) const {
+Intersection Sphere::intersect(Ray const& r) const {
 	// //Schnittpunkt berechnen
 	// glm::dvec3 L= center_-ray.origin;
 	
@@ -79,7 +79,7 @@ Intersection Sphere::intersect(Ray const& ray) const {
 	// glm::dvec3 normale = Sphere::kreisNormale(center_, P1); //Spherenormale am Schnittpunkt 
 
 
-
+	auto ray = object_ray(r);
 
 	Intersection intersect;
 	intersect.hit = glm::intersectRaySphere(

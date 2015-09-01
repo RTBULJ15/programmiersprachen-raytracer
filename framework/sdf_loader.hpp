@@ -27,16 +27,23 @@ class SDFLoader {
 
 	const std::shared_ptr<Material> lookup_material (std::string const& material_name) const;
 	const std::shared_ptr<Camera> lookup_camera (std::string const& camera_name) const;
+	const std::shared_ptr<Shape> lookup_shape (std::string const& shape_name) const;
 
+	std::shared_ptr<Shape> fetch_composite (std::istringstream& iss);
 	std::shared_ptr<Shape> fetch_sphere (std::istringstream& iss) const;
 	std::shared_ptr<Shape> fetch_box (std::istringstream& iss) const;
-	std::shared_ptr<Shape> fetch_shape (std::istringstream& iss) const;
+	std::shared_ptr<Shape> fetch_shape (std::istringstream& iss);
 	std::shared_ptr<Material> fetch_material (std::istringstream& iss) const;
 	std::shared_ptr<Light> fetch_light (std::istringstream& iss) const;
 	std::shared_ptr<Camera> fetch_camera (std::istringstream& iss) const;
 
+	void parseTranslation (std::shared_ptr<Shape>  const& shape, std::istringstream& iss);
+	void parseRotation (std::shared_ptr<Shape>  const& shape, std::istringstream& iss);
+	void parseScale (std::shared_ptr<Shape>  const& shape, std::istringstream& iss);
+
 	RenderTask fetch_render_task (std::istringstream& iss) const;
 
+	void parseTransformation (std::istringstream& iss);
 	void parseDefinition (std::istringstream& iss);
 	void parseLine (std::string const& line);
 

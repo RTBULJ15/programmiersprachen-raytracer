@@ -16,7 +16,6 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 class Shape{
-
 public:
 	Shape ();
 	Shape (std::string const& name);

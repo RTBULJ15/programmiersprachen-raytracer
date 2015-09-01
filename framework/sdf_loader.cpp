@@ -54,6 +54,16 @@ SDFLoader::fetch_color (std::istringstream& iss) const
   return Color(r, g, b);
 }
 
+const std::shared_ptr<Shape>
+SDFLoader::lookup_shape (std::string const& shape_name) const
+{
+  auto it = shapes_.find(shape_name);
+  if (it == shapes_.end()) {
+    throw std::runtime_error(std::string("no shape with name: " + shape_name));
+  }
+  return it->second;
+}
+
 const std::shared_ptr<Material>
 SDFLoader::lookup_material (std::string const& material_name) const
 {
@@ -85,6 +95,24 @@ SDFLoader::fetch_sphere (std::istringstream& iss) const
 }
 
 std::shared_ptr<Shape>
+SDFLoader::fetch_composite (std::istringstream& iss)
+{
+  auto name = fetch_primitive<std::string>(iss);
+  auto composite = std::make_shared<Composite>();
+
+  composite->name(name);
+
+  while (!iss.eof()) {
+    auto childname = fetch_primitive<std::string>(iss);
+    auto child = lookup_shape(childname);
+    composite->add_child(child);
+    shapes_.erase(child->name());
+  }
+
+  return composite;
+}
+
+std::shared_ptr<Shape>
 SDFLoader::fetch_box (std::istringstream& iss) const
 {
   auto name = fetch_primitive<std::string>(iss);
@@ -103,13 +131,15 @@ SDFLoader::fetch_camera (std::istringstream& iss) const
 }
 
 std::shared_ptr<Shape>
-SDFLoader::fetch_shape (std::istringstream& iss) const
+SDFLoader::fetch_shape (std::istringstream& iss)
 {
   auto shapetype = fetch_primitive<std::string>(iss);
   if (shapetype == "sphere") {
     return fetch_sphere(iss);
   } else if (shapetype == "box") {
     return fetch_box(iss);
+  } else if (shapetype == "composite") {
+    return fetch_composite(iss);
   } else {
     throw std::runtime_error(std::string("unkown shape: " + shapetype));
   }
@@ -145,6 +175,43 @@ SDFLoader::fetch_render_task (std::istringstream& iss) const
   auto filename = fetch_primitive<std::string>(iss);
   auto resolution = fetch_ivec2(iss);
   return RenderTask(camera, scene_, filename, resolution);
+}
+
+void 
+SDFLoader::parseScale (std::shared_ptr<Shape> const& shape, std::istringstream& iss)
+{
+  auto scale = fetch_dvec3(iss);
+  shape->scale(scale);
+}
+
+void 
+SDFLoader::parseRotation (std::shared_ptr<Shape> const& shape, std::istringstream& iss)
+{
+  auto angle = fetch_primitive<double>(iss);
+  auto rad = angle * M_PI / 180;
+  auto axis = fetch_dvec3(iss);
+  shape->rotate(rad, axis);
+}
+
+void 
+SDFLoader::parseTranslation (std::shared_ptr<Shape> const& shape, std::istringstream& iss)
+{
+  auto translation = fetch_dvec3(iss);
+  shape->translate(translation);
+}
+
+void 
+SDFLoader::parseTransformation (std::istringstream& iss)
+{
+  auto shape = lookup_shape(fetch_primitive<std::string>(iss)); 
+  auto transf_type = fetch_primitive<std::string>(iss);
+  if (transf_type == "scale") {
+    parseScale(shape, iss);
+  } else if (transf_type == "rotate") {
+    parseRotation(shape, iss);
+  } else if (transf_type == "translate") {
+    parseTranslation(shape, iss);
+  }
 }
 
 void 
@@ -186,6 +253,8 @@ SDFLoader::parseLine (std::string const& line)
   } else if (command == "render") {
     auto task = fetch_render_task(iss);
     tasks_.push_back(task);
+  } else if (command == "transform") {
+    parseTransformation(iss);
   }
 }
 

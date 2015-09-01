@@ -238,7 +238,9 @@ void Box::print(std::ostream& os) const{
 	os << " MaxVec: " << max_.x << max_.y << max_.z;
 }
 
-Intersection Box::intersect(Ray const& ray) const{
+Intersection Box::intersect(Ray const& r) const{
+
+	auto ray = object_ray(r);
 	Intersection isec;
 
 	for (auto f: faces_) {
