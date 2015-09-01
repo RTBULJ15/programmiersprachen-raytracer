@@ -14,13 +14,14 @@ class Image
 {
 public:
     Image();
-    Image(std::vector<Pixel> pixels, glm::ivec2 resolution);
-    void setPixel(Pixel pixel);
+    Image(glm::ivec2 const& resolution);
+    void setPixel(Pixel const& pixel);
    // std::vector pixels();
-    glm::ivec2 resolution();
-
+    glm::ivec2 resolution() const;
+	const std::vector<Color>& colorbuffer() const;
+  
 private:
-    std::vector<Pixel> pixels_;
+    std::vector<Color> colorbuffer_;
     glm::ivec2 resolution_;
 };
 

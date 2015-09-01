@@ -18,11 +18,10 @@
 
 	Shape::~Shape()
     	{
-        std::cout << "~Shape destructor called "<< name_ << std::endl;
     	}
 
-	std::string const& Shape::getName() const{return name_;}
-	void Shape::setName(std::string x) {name_ = x;}
+	std::string const& Shape::name() const{return name_;}
+	void Shape::name(std::string x) {name_ = x;}
 
 	std::shared_ptr<Material> const& Shape::getMaterial() const{return material_;}
         void Shape::setMaterial(std::shared_ptr<Material> mat) {material_ = mat;}

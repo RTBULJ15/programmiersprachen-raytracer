@@ -10,7 +10,7 @@ Sphere::Sphere()
 {}
 
 
-Sphere::Sphere(glm::dvec3 const& center, float radius, std::string name, std::shared_ptr<Material> const& material)
+Sphere::Sphere(std::string const& name, glm::dvec3 const& center, float radius, std::shared_ptr<Material> const& material)
   : Shape(name, material), center_(center), radius_(radius) //Shape::setName(name), Shape::setColor(color)
 {}
 
@@ -89,6 +89,8 @@ Intersection Sphere::intersect(Ray const& ray) const {
 	);
 
 	intersect.t=glm::abs(glm::length(intersect.position-ray.origin));
+
+	intersect.material = material_;
 	// intersect.position = P1;
 	// intersect.normal = normale;
 

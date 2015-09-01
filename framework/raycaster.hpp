@@ -1,6 +1,8 @@
 #ifndef BUW_RAYCASTER_HPP
 #define BUW_RAYCASTER_HPP
 
+#define RAY_EPSILON 1e-6
+
 #include <glm/vec3.hpp>
 #include "color.hpp"
 #include "scene.hpp"
@@ -14,15 +16,12 @@ class Raycaster
 {
 public:
     Raycaster();
-    Raycaster(Camera const& camera, Scene const& scene);
-    Image render();
-    Intersection trace(Ray traceray);
-    Pixel shade(Ray pixelray, Intersection pixelisec);
+    Raycaster(std::shared_ptr<Scene> const& scene);
+    Intersection trace(Ray const& ray);
+    Color shade(Ray const& ray, Intersection const& isec);
 
 private:
-    Camera camera_;
-    Scene scene_;
-
+    std::shared_ptr<Scene> scene_;
 };
 
 #endif

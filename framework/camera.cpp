@@ -1,23 +1,36 @@
 #include "camera.hpp"
 #include <iostream>
 #include <string>
+#include <math.h>
 
 Camera::Camera()
-: name_{"default"}, horizontal_apex_angle_{}
+: name_{"default"}, focal_length_{1}
 {}
 
-Camera::Camera(std::string name,double horizontal_apex_angle/*,glm::ivec2 resolution*/)
-:name_(name),horizontal_apex_angle_(horizontal_apex_angle)
+Camera::Camera(std::string const& name, double horizontal_apex_angle)
+: name_(name)
+, focal_length_(1 / glm::tan(horizontal_apex_angle * M_PI / 360))
 {}
 
-void Camera::setname(std::string name)
+std::string 
+Camera::name () const 
+{
+	return name_;
+}
+
+void Camera::setname(std::string const& name)
 {
     name_ = name;
 }
 
 void Camera::setangle(double angle)
 {
-    horizontal_apex_angle_ = angle;
+    focal_length_ = 1 / glm::tan(angle * M_PI / 360);
+}
+
+double 
+Camera::focallength () const {
+	return focal_length_;
 }
 
 /*void Camera::setResolution_x(double resx)

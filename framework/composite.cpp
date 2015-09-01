@@ -29,4 +29,4 @@ Intersection Composite::intersect(Ray const& r) const{
 	return i;
 }
 
- Composite::~Composite(){std::cout << "~composite destructor called" << std::endl;}
+ Composite::~Composite(){}

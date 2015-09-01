@@ -4,16 +4,19 @@
 #include <glm/glm.hpp>
 #include <iostream>
 #include <string>
+#include <memory>
+#include "Material.hpp"
 
 struct Intersection
 {
-	Intersection () : hit(false), t(-1), position(), normal() {}
+	Intersection () : hit(false), t(-1), position(), normal(), material() {}
 
-	Intersection (bool h, double ray_t, glm::dvec3 const& p, glm::dvec3 const& n)
+	Intersection (bool h, double ray_t, glm::dvec3 const& p, glm::dvec3 const& n, std::shared_ptr<Material> mat)
 	 : hit(h && ray_t >= 0)
 	 , position(p)
 	 , normal(n)
 	 , t(ray_t)
+	 , material(mat)
 	{}
 
 	bool hit;
@@ -23,6 +26,8 @@ struct Intersection
 	double t;
 
 	glm::dvec3 normal;
+
+	std::shared_ptr<Material> material;
 
 };
 

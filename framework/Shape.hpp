@@ -24,8 +24,8 @@ public:
 
 	virtual Intersection intersect(Ray const& ray) const = 0; //pure virtual
 
-	std::string const& getName() const;
-	void setName(std::string x);
+	std::string const& name() const;
+	void name(std::string x);
 	
 	std::shared_ptr<Material> const& getMaterial() const;
 	void setMaterial(std::shared_ptr<Material> mat);

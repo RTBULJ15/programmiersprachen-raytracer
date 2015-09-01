@@ -2,6 +2,7 @@
 # define BUW_RAY_HPP
 
 #include <glm/glm.hpp>
+#include <ostream>
 
 struct Ray
 {	
@@ -19,6 +20,15 @@ struct Ray
     	return 
     	Ray(glm::dvec3(t * glm::dvec4(ray.origin, 1.0)),
       	glm::dvec3(t * glm::dvec4(ray.direction, 0.0)));
+    }
+
+    friend std::ostream& operator << (std::ostream& os, Ray const& ray) 
+    {
+    	os << "ray{";
+    	os << "o(" << ray.origin.x << " " << ray.origin.y << " " << ray.origin.z << ")";
+    	os << "d(" << ray.direction.x << " " << ray.direction.y << " " << ray.direction.z << ")";
+    	os << "}";
+    	return os;
     }
 
 	glm::dvec3 origin;

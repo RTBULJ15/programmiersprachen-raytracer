@@ -159,7 +159,7 @@ class Box : public Shape{
 
 	public:
 		Box();
-		Box(glm::dvec3 const& min, glm::dvec3 const& max, std::string name, std::shared_ptr<Material> const& material);
+		Box(std::string const& name, glm::dvec3 const& min, glm::dvec3 const& max, std::shared_ptr<Material> const& material);
 
 		// /* virtual */ float area() const override;
 		// /* virtual */ float volume() const override;

@@ -10,18 +10,16 @@ class Camera
 {
 public:
     Camera();
-    Camera(std::string name,double horizontal_apex_angle/*, glm::ivec2 resolution*/);
-    void setname(std::string name);
+    Camera(std::string const& name, double horizontal_apex_angle);
+    void setname(std::string const& name);
+    std::string name () const;
     void setangle(double angle);
-    void setResolution_x(double resx);
-    void setResolution_y(double resy);
+    double focallength () const;
+    double fov_to_fl() const;
 
 private:
     std::string name_;
-    double horizontal_apex_angle_;
-    // float focal_lenght;
-    
-    //glm::ivec2 resolution;
+    double focal_length_;
 };
 
 #endif

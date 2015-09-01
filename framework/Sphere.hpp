@@ -10,7 +10,7 @@
 class Sphere : public Shape{
 	public:
 		Sphere();
-		Sphere(glm::dvec3 const& center, float radiusr, std::string name, std::shared_ptr<Material> const& material);
+		Sphere(std::string const& name, glm::dvec3 const& center, float radiusr, std::shared_ptr<Material> const& material);
 
 		/* virtual  float area() const ;
 		virtual  float volume() const override;*/

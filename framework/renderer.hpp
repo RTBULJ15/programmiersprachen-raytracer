@@ -17,29 +17,39 @@
 #include <iostream>
 #include "intersection.hpp"
 #include "Ray.hpp"
-#include "scene.hpp"
+#include "rendertask.hpp"
+#include "image.hpp"
 
 class Renderer
 {
 public:
 
-  Renderer(unsigned w, unsigned h, std::string const& file);
+  Renderer(RenderTask const& task);
 
-  void render();
-  void write(Pixel const& p);
+  Image render();
 
+  Image const& image() const;
 
-  inline std::vector<Color> const& colorbuffer() const
+private:
+
+  RenderTask task_;
+  Image img_;
+
+  /*void write(Pixel const& p);
+*/
+
+/*  inline std::vector<Color> const& colorbuffer() const
   {
     return colorbuffer_;
-  }
+  }*/
+/*
 
 private:
   unsigned width_;
   unsigned height_;
   std::vector<Color> colorbuffer_;
   std::string filename_;
-  PpmWriter ppm_;
+  PpmWriter ppm_;*/
 };
 
 #endif // #ifndef BUW_RENDERER_HPP

@@ -138,7 +138,7 @@ Box::Box()
 {}
 
 
-Box::Box(glm::dvec3 const& p1, glm::dvec3 const& p2, std::string name, std::shared_ptr<Material> const& material)
+Box::Box(std::string const& name, glm::dvec3 const& p1, glm::dvec3 const& p2, std::shared_ptr<Material> const& material)
   : Shape(name, material)
   , min_(std::min(p1.x, p2.x), std::min(p1.y, p2.y), std::min(p1.z, p2.z))
   , max_(std::max(p1.x, p2.x), std::max(p1.y, p2.y), std::max(p1.z, p2.z))
@@ -249,6 +249,8 @@ Intersection Box::intersect(Ray const& ray) const{
 			}
 		}
 	}
+
+	isec.material = material_;
 
 	return isec;
 
