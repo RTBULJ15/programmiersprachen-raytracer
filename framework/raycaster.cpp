@@ -11,19 +11,19 @@ Raycaster::Raycaster(std::shared_ptr<Scene> const& scene)
 Intersection 
 Raycaster::trace (Ray const& ray)
 {
-	return scene_->root().intersect(ray);
+	return scene_->root()->intersect(ray);
 }
 
 Color 
 Raycaster::shade(Ray const& ray, Intersection const& isec)
 {
-	if (isec.hit) {
+	if (isec.hit && ray.depth > 0) {
 		auto p = ray.origin + isec.t * ray.direction;
 		Color result;
 		for (auto l: scene_->get_lights()) {
 			auto ldir = glm::normalize(l->position() - p);
 			result += l->ambient();
-			Ray sh_ray(p + RAY_EPSILON * isec.normal, ldir);
+			Ray sh_ray(p + RAY_EPSILON * isec.normal, ldir, ray.depth - 1);
 			auto sh_isec = trace(sh_ray);
 			if (!sh_isec.hit) {
 				auto eye = -ray.direction;

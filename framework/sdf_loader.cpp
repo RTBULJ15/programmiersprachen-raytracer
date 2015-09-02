@@ -127,7 +127,10 @@ SDFLoader::fetch_camera (std::istringstream& iss) const
 {
   auto name = fetch_primitive<std::string>(iss);
   auto angle = fetch_primitive<double>(iss);
-  return std::make_shared<Camera>(name, angle);
+  auto eye = fetch_dvec3(iss);
+  auto dir = fetch_dvec3(iss);
+  auto up = fetch_dvec3(iss);
+  return std::make_shared<Camera>(name, angle, eye, dir, up);
 }
 
 std::shared_ptr<Shape>
@@ -174,7 +177,20 @@ SDFLoader::fetch_render_task (std::istringstream& iss) const
   auto camera = lookup_camera(fetch_primitive<std::string>(iss));
   auto filename = fetch_primitive<std::string>(iss);
   auto resolution = fetch_ivec2(iss);
-  return RenderTask(camera, scene_, filename, resolution);
+
+  auto scene = std::make_shared<Scene>();
+  
+  for (auto p: shapes_) {
+    scene->add_shape(p.second->clone());
+  }
+  for (auto p: lights_) {
+    scene->add_light(p.second->clone());
+  }
+  for (auto p: materials_) {
+    scene->add_material(p.second);
+  } 
+
+  return RenderTask(camera, scene, filename, resolution);
 }
 
 void 
@@ -246,6 +262,10 @@ SDFLoader::parseDefinition (std::istringstream& iss)
 void
 SDFLoader::parseLine (std::string const& line) 
 {
+  if (line.empty()) {
+    return;
+  }
+
   std::istringstream iss(line);
   auto command = fetch_primitive<std::string>(iss);
   if (command == "define") {
@@ -255,12 +275,11 @@ SDFLoader::parseLine (std::string const& line)
     tasks_.push_back(task);
   } else if (command == "transform") {
     parseTransformation(iss);
+  } else if (command[0] == '#') {
+    return;
+  } else {
+    throw std::runtime_error(std::string("unknown command " + command));
   }
-}
-
-std::shared_ptr<Scene> const& 
-SDFLoader::scene() const{
-  return scene_;
 }
 
 std::vector<RenderTask> const&
@@ -270,7 +289,7 @@ SDFLoader::tasks () const
 }
 
 SDFLoader::SDFLoader (std::string const& sdfpath)
-: scene_(std::make_shared<Scene>())
+ : cameras_(), shapes_(), lights_(), materials_()
 {
 	std::ifstream infile;
 	infile.open(sdfpath);
@@ -283,26 +302,6 @@ SDFLoader::SDFLoader (std::string const& sdfpath)
 
     parseLine(line);
 
-  }
-  
-  // add all shapes from the "shape" map to the scene
-  for (auto p: cameras_) {
-    scene_->add_camera(p.second);
-  }
-
-  // add all shapes from the "shape" map to the scene
-  for (auto p: shapes_) {
-    scene_->add_shape(p.second);
-  }
-
-    // add all shapes from the "shape" map to the scene
-  for (auto p: lights_) {
-    scene_->add_light(p.second);
-  }
-
-    // add all shapes from the "shape" map to the scene
-  for (auto p: materials_) {
-    scene_->add_material(p.second);
   }  
 }
 

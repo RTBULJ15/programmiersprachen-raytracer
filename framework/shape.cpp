@@ -5,6 +5,16 @@
 	Shape::Shape ()
 	: name_{"default"}, material_{}
 	{}
+
+	Shape::Shape (Shape const& rhs) 
+	 : name_(rhs.name_)
+	 , material_(rhs.material_)
+	 , world_transform_(rhs.world_transform_)
+	 , world_transform_inv_(rhs.world_transform_inv_)
+	 , world_transform_T_(rhs.world_transform_T_)
+	 , world_transform_inv_T_(rhs.world_transform_inv_T_)
+	{}
+
 	Shape::Shape (std::string const& name) 
 	: name_{name}, material_{}
 	, world_transform_(), world_transform_inv_()

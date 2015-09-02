@@ -2,8 +2,20 @@
 
 
 Scene::Scene()
-: bgcolor_(), lights_(), cameras_(), root_(), materials_(){}
+: bgcolor_(), lights_(), cameras_()
+, root_(std::make_shared<Composite>()), materials_(){}
 
+Scene::Scene(Scene const& rhs)
+ : bgcolor_(), lights_(), cameras_(), 
+ root_(std::dynamic_pointer_cast<Composite>(rhs.root_->clone())), materials_(rhs.materials_)
+ {
+ 	for (auto l : rhs.lights_) {
+ 		lights_.push_back(l->clone());
+ 	}
+ 	for (auto c : rhs.cameras_) {
+ 		cameras_.push_back(c->clone());
+ 	}
+ }
 
 //Scene::Scene(Color amb_light, std::vector<Light> lights, Camera cam , Composite comp)
 //{
@@ -40,7 +52,7 @@ std::vector<std::shared_ptr<Light>> const& Scene::get_lights(){
 	return lights_;
 }
 
-Composite const&
+std::shared_ptr<Composite> const&
 Scene::root () const
 {
 	return root_;
@@ -49,7 +61,13 @@ Scene::root () const
 void
 Scene::add_shape (std::shared_ptr<Shape> const& shape)
 {
-	root_.add_child(shape);
+	root_->add_child(shape);
+}
+
+std::shared_ptr<Scene> 
+Scene::clone () const 
+{
+	return std::make_shared<Scene>(*this);
 }
 
 Color 

@@ -29,7 +29,6 @@ int main(int argc, char* argv[])
 
 
   SDFLoader sdfloader(sdfpath);
-  auto scene = sdfloader.scene();
   auto tasks = sdfloader.tasks();
 
   std::cout << "finished loading sdf" << std::endl;

@@ -24,11 +24,13 @@ struct Material
 
     friend std::ostream& operator<<(std::ostream& os, Material const& m)
 	{
-		os << "Name: " << m.name << " ";
-		os << "Ambient: " << m.ka << " ";
-		os << "Diffuse: " << m.kd << " ";
-		os << "Specular: " << m.ks << " ";
-		os << "Specular Exponent: " << m.specular_exp << " ";
+		os << "{Material ";
+		os << m.name << " ";
+		os << m.ka << " ";
+		os << m.kd << " ";
+		os << m.ks << " ";
+		os << m.specular_exp << " ";
+		os << "}";
 		return os;
 	}
 

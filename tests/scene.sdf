@@ -1,11 +1,23 @@
 define material red 1 100 230 1 0 0 1 0 0 100
 define material blue 0 0 1 0 0 1 0 1 1 100
 define shape box rbottom -10 -2.2 -10 10 -2 10 red
-define shape sphere bsphere 0 -1 6 1 blue
+define shape sphere bsphere -7 0 6 1 blue
 transform bsphere translate 10 0 0
 define shape composite comp rbottom bsphere
 define light sun 100 110 -100 .05 .05 .05 .8 .8 .8
-define camera eye 90.0
-define camera eye2 45.0
+define camera eye 90.0 0 0 0 0 0 1 0 1 0
+render eye test.ppm 100 100
+transform comp rotate 45 0 0 1
+
+# das ist ein kommentar whooo
+
+#das uach
+
+render eye test.ppm 100 100
+transform comp rotate 45 0 0 1
+render eye test.ppm 100 100
+transform comp rotate 45 0 0 1
+render eye test.ppm 100 100
+transform comp rotate 45 0 0 1
 render eye test.ppm 100 100
 transform comp rotate 45 0 0 1

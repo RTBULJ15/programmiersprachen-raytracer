@@ -7,10 +7,15 @@
 class Composite : public Shape{
 	public: 
 		Composite();
+		Composite(Composite const& rhs);
+
+		/* virtual */ std::shared_ptr<Shape> clone() const override;
 
         void add_child(std::shared_ptr<Shape> const& child);
         Intersection intersect(Ray const& ray) const override;
         std::vector<std::shared_ptr<Shape>> const& get_child_vec();
+        
+        /* virtual */ void print(std::ostream& os) const override;
 
         ~Composite();
 

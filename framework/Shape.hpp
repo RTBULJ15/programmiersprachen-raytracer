@@ -18,10 +18,12 @@
 class Shape{
 public:
 	Shape ();
+	Shape(Shape const& rhs);
 	Shape (std::string const& name);
 	Shape (std::string const& name, std::shared_ptr<Material> const& material);
 
 	virtual Intersection intersect(Ray const& ray) const = 0; //pure virtual
+	virtual std::shared_ptr<Shape> clone() const = 0;
 
 	std::string const& name() const;
 	void name(std::string x);

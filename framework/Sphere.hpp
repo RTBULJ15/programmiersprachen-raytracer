@@ -10,7 +10,10 @@
 class Sphere : public Shape{
 	public:
 		Sphere();
+		Sphere(Sphere const& rhs);
 		Sphere(std::string const& name, glm::dvec3 const& center, float radiusr, std::shared_ptr<Material> const& material);
+
+		/* virtual */ std::shared_ptr<Shape> clone () const override;
 
 		/* virtual  float area() const ;
 		virtual  float volume() const override;*/

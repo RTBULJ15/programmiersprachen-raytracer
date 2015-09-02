@@ -137,6 +137,12 @@ Box::Box()
   : Shape{}, min_(0,0,0), max_(0,0,0), faces_()
 {}
 
+Box::Box(Box const& rhs)
+ : Shape(rhs)
+ , min_(rhs.min_)
+ , max_(rhs.max_)
+ , faces_(rhs.faces_)
+{}
 
 Box::Box(std::string const& name, glm::dvec3 const& p1, glm::dvec3 const& p2, std::shared_ptr<Material> const& material)
   : Shape(name, material)
@@ -189,6 +195,12 @@ Box::Box(std::string const& name, glm::dvec3 const& p1, glm::dvec3 const& p2, st
 	faces_[3] = right;
 	faces_[4] = up;
 	faces_[5] = down;
+}
+
+std::shared_ptr<Shape>
+Box::clone () const 
+{
+	return std::make_shared<Box>(*this);
 }
 
 void Box::setMin(glm::dvec3 const& min)

@@ -9,10 +9,22 @@ Sphere::Sphere()
   : Shape{}, center_{0.0f,0.0f,0.0f}, radius_{0.0f}
 {}
 
+Sphere::Sphere(Sphere const& rhs)
+ : Shape(rhs)
+ , center_(rhs.center_)
+ , radius_(rhs.radius_)
+{}
 
 Sphere::Sphere(std::string const& name, glm::dvec3 const& center, float radius, std::shared_ptr<Material> const& material)
   : Shape(name, material), center_(center), radius_(radius) //Shape::setName(name), Shape::setColor(color)
 {}
+
+
+std::shared_ptr<Shape>
+Sphere::clone () const 
+{
+	return std::make_shared<Sphere>(*this);
+}
 
 glm::dvec3 Sphere::getcenter() const{
   return center_;

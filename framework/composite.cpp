@@ -3,6 +3,20 @@
 Composite::Composite() : 
   Shape(), child_vec_(){}
 
+Composite::Composite(Composite const& rhs)
+ : Shape(rhs), child_vec_()
+{
+  for (auto c: rhs.child_vec_) {
+    child_vec_.push_back(c->clone());
+  }
+}
+
+std::shared_ptr<Shape>
+Composite::clone () const 
+{
+  return std::make_shared<Composite>(*this);
+}
+
 
  void Composite::add_child(std::shared_ptr<Shape> const& child){
    child_vec_.push_back(child);
@@ -29,6 +43,14 @@ Intersection Composite::intersect(Ray const& ray) const{
   	}
   }
 	return i;
+}
+
+void Composite::print(std::ostream& os) const {
+  os << "{Composite" << " ";
+  for (auto c: child_vec_) {
+    c->print(os);
+  }
+  os << "}";
 }
 
  Composite::~Composite(){}

@@ -50,11 +50,8 @@ class SDFLoader {
 public:
 	SDFLoader(std::string const& sdfpath);
 	//Scene scene () const;
-	std::shared_ptr<Scene> const& scene() const;
 	std::vector<RenderTask> const& tasks() const;
 private:
-    std::shared_ptr<Scene> scene_;
-
     std::vector<RenderTask> tasks_;
 
     std::map<std::string, std::shared_ptr<Camera>> cameras_;

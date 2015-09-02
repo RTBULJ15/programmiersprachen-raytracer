@@ -16,6 +16,7 @@ class Scene
 {
  public:
     Scene();
+    Scene(Scene const& rhs);
     //Scene(Color amb_light, std::vector<Light> lights, Camera cam , Composite comp);
 
     void add_camera (std::shared_ptr<Camera> const& camera);
@@ -34,16 +35,34 @@ class Scene
 
 
     void add_shape (std::shared_ptr<Shape> const& shape);
-    Composite const& root () const;
+    std::shared_ptr<Composite> const& root () const;
 
+    std::shared_ptr<Scene> clone () const;
 
     Color bgcolor () const;
+
+    friend std::ostream& operator << (std::ostream& os, Scene const& scene) {
+        os << "{Scene ";
+        os << scene.bgcolor_ << " ";
+        os << *(scene.root_) << " ";
+        for (auto l: scene.lights_) {
+            os << *l << " ";
+        }
+        for (auto c: scene.cameras_) {
+            os << *c << " ";
+        }
+        for (auto m: scene.materials_) {
+            os << *m << " ";
+        }
+        os << "}";
+        return os;
+    }
 
  private:
     Color bgcolor_;
     std::vector<std::shared_ptr<Light>> lights_;
     std::vector<std::shared_ptr<Camera>> cameras_;
-    Composite root_;
+    std::shared_ptr<Composite> root_;
     std::vector<std::shared_ptr<Material>> materials_;
 
 	/*
